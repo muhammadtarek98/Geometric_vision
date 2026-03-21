@@ -1,0 +1,16 @@
+#pragma once
+#include "line.h"
+#include "point.h"
+#include <bits/stdc++.h>
+#include "plane.h"
+
+namespace intersection
+{
+    bool intersection(const std::tuple<const point::point2d,const point::point2d> &l1,const std::tuple<const point::point2d,const point::point2d> &pl2);
+    bool intersection(const point::point2d &p1,const point::point2d &p2,const point::point2d &p3,const point::point2d &p4);
+    bool intersection(const point::point2d &p1,const point::point2d &p2,const point::point2d &p3,const point::point2d &p4,point::point2d &intersection_point);
+    bool intersection(const line::line2d &l1,const line::line2d &l2, point::point2d &intersection_point);
+    bool intersection(const line::line3d &l1,const line::line3d &l2, point::point3d &intersection_point);
+    point::point3d plane_line_intersection(const line::line3d &l,const plane::Plane3D &p);
+    line::line3d plane_plane_intersection(const plane::Plane3D &p1,const plane::Plane3D &p2);
+}

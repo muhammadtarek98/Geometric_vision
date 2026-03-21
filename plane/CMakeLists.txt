@@ -1,0 +1,5 @@
+file(GLOB SRC "./source/*.cpp")
+file(GLOB INCLUDE "./header/*.h")
+add_library(Plane STATIC ${SRC})
+target_link_libraries(Plane PUBLIC Vector Point)
+target_include_directories(Point PUBLIC ./header)
