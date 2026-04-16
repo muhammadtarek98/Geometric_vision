@@ -52,4 +52,4 @@ namespace vector
     double scalar_triple_dot_product(const vect3D &v1,const vect3D &v2,const vect3D &v3);
     double areaTriangle2D(const vect2D &point1,const vect2D &point2,const vect2D &point3);
     int orientation2D(const vect2D& point1, const vect2D& point2, const vect2D& point3);
-} // jmk
+}

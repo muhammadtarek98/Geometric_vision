@@ -8,5 +8,4 @@ namespace DCEL
     template<class type, size_t dim> class Face;
     template<class type,size_t dim>class Polygon;
 
-
 } // DCEL

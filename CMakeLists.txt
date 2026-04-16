@@ -13,6 +13,7 @@ add_subdirectory(angle)
 add_subdirectory(geometric_utils)
 add_subdirectory(distance)
 add_subdirectory(DCEL)
+add_subdirectory(Monotone_polygon_partitioning)
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${Core_LIBS} Vector Point Line angle Plane Intersection
         Geometric_utils Distance DCEL GTest::gtest_main)

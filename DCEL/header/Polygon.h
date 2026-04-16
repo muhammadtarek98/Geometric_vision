@@ -26,5 +26,4 @@ namespace DCEL
             std::weak_ptr<Edge<type,dim>> e2);
         virtual ~Polygon()=default;
     };
-
 } // DCEL
