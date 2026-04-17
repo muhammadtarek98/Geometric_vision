@@ -1,8 +1,8 @@
 #include "vertex_type.hpp"
-namespace GeometricVision
+namespace GeometricVision::PolygonPartition
 {
     template <class type, size_t dim>
-    PolygonPartition::VERTEX_CATEGORY PolygonPartition::vertex_category(DCEL::Vertex<type, dim>* v)
+    VERTEX_CATEGORY PolygonPartition::vertex_category(DCEL::Vertex<type, dim>* v)
     {
         auto v_prev=v->edge->prev->origin;
         auto v_next=v->edge->next->origin;

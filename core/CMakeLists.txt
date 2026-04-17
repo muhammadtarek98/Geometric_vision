@@ -1,4 +1,3 @@
-enable_testing()
 file(GLOB SRC "./source/*.cpp")
 file(GLOB INCLUDE "./header/*.h")
 add_library(Core STATIC ${SRC})
