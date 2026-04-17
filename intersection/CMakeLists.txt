@@ -1,5 +1,5 @@
 file(GLOB SRC "./source/*.cpp")
 file(GLOB INCLUDE "./header/*.h")
 add_library(Intersection STATIC ${SRC})
-target_link_libraries(Intersection PUBLIC angle Vector Line Point Plane)
+target_link_libraries(Intersection PUBLIC Angle Vector Line Point Plane)
 target_include_directories(Intersection PUBLIC ./header)

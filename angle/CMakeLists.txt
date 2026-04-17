@@ -1,5 +1,0 @@
-file(GLOB SRC "./source/*.cpp")
-file(GLOB INCLUDE "./header/*.h")
-add_library(angle STATIC ${SRC})
-target_link_libraries(angle PUBLIC Vector Core Line Plane Point)
-target_include_directories(angle PUBLIC ./header )
