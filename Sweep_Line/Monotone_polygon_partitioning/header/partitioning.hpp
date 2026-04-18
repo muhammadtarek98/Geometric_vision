@@ -1,8 +1,8 @@
 #pragma once
 #include "vertex_type.hpp"
 #include "VertexWrapper.hpp"
-#include "point.h"
-#include "Edge.h"
+#include "point.hpp"
+#include "Edge.hpp"
 #include "EdgeWrapper.hpp"
 namespace GeometricVision::PolygonPartition
 {

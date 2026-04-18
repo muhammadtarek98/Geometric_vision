@@ -1,4 +1,4 @@
-#include "point.h"
+#include "point.hpp"
 namespace GeometricVision::point
 {
     bool sort_point2d_left_right_top_bottom(const point2d& a, const point2d& b)

@@ -1,4 +1,4 @@
-#include "Edge.h"
+#include "Edge.hpp"
 namespace GeometricVision::DCEL
 {
     template<class type,size_t dim>

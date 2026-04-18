@@ -1,7 +1,7 @@
 #pragma once
-#include "line.h"
-#include "plane.h"
-#include "core.h"
+#include "line.hpp"
+#include "plane.hpp"
+#include "core.hpp"
 namespace GeometricVision::Angle
 {    template<class T,size_t dim>
     static double get_angle(vector::Vector<T,dim>&v1,vector::Vector<T,dim>&v2);

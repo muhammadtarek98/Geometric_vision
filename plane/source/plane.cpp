@@ -1,4 +1,4 @@
-#include "plane.h"
+#include "plane.hpp"
 namespace GeometricVision::plane
 {
     template <class coord_type>

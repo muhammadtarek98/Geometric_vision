@@ -1,4 +1,4 @@
-#include "line.h"
+#include "line.hpp"
 namespace GeometricVision::Line
 {
     template<class coord_type,size_t dim>

@@ -1,8 +1,8 @@
 #pragma once
 #include<bits/stdc++.h>
-#include "Vertex.h"
-#include "point.h"
-#include"angles.h"
+#include "Vertex.hpp"
+#include "point.hpp"
+#include"angles.hpp"
 namespace GeometricVision::PolygonPartition
 {
     enum class VERTEX_CATEGORY

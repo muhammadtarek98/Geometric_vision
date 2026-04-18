@@ -1,4 +1,4 @@
-#include "vector.h"
+#include "vector.hpp"
 namespace GeometricVision::vector
 {
     template <class coordinate_type, size_t dim>

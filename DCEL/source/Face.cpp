@@ -1,7 +1,8 @@
-#include "Face.h"
-#include "Edge.h"
-#include "Vertex.h"
-#include "point.h"
+#include "Face.hpp"
+#include "Edge.hpp"
+#include "Vertex.hpp"
+#include "point.hpp"
+#include "vector.hpp"
 namespace GeometricVision::DCEL
 {
 

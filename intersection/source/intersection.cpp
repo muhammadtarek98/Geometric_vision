@@ -1,4 +1,4 @@
-#include "intersection.h"
+#include "intersection.hpp"
 namespace GeometricVision::Intersection
 {
     bool intersection(const std::tuple<point::point2d,point::point2d>& l1,

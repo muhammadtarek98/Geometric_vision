@@ -1,19 +1,22 @@
 #include <gtest/gtest.h>
 #include <bits/stdc++.h>
-#include "vector.h"
-#include "point.h"
-#include "line.h"
-#include "plane.h"
-#include "angles.h"
-#include "distance.h"
-#include "geo_utils.h"
-#include "intersection.h"
-#include "core.h"
-#include "Vertex.h"
-#include "Edge.h"
-#include "Face.h"
-#include "Polygon.h"
+#include "vector.hpp"
+#include "point.hpp"
+#include "line.hpp"
+#include "plane.hpp"
+#include "angles.hpp"
+#include "distance.hpp"
+#include "geo_utils.hpp"
+#include "intersection.hpp"
+#include "core.hpp"
+#include "Vertex.hpp"
+#include "Edge.hpp"
+#include "Face.hpp"
+#include "Polygon.hpp"
+#include "partitioning.hpp"
+
 using namespace GeometricVision;
+
 TEST(CoreTest, IsEqual) {
     EXPECT_TRUE(GeometricVision::is_equal(1.0, 1.0 + TOL/2.0));
     EXPECT_FALSE(GeometricVision::is_equal(1.0, 1.0 + TOL*2.0));

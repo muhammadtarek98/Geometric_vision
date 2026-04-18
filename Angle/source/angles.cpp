@@ -1,4 +1,4 @@
-#include "angles.h"
+#include "angles.hpp"
 namespace GeometricVision::Angle
 {
     template<class T,size_t dim>

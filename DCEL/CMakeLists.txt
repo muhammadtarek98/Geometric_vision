@@ -1,5 +1,5 @@
 file(GLOB SRC "./source/*.cpp")
-file(GLOB HEADER "./header/*.h")
+file(GLOB HEADER "./header/*.hpp")
 add_library(DCEL STATIC ${SRC})
 target_link_libraries(DCEL PUBLIC Vector Point Angle)
 target_include_directories(DCEL PUBLIC ./header )

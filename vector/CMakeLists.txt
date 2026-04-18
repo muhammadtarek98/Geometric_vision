@@ -1,5 +1,5 @@
 file(GLOB SRC "./source/*.cpp")
-file(GLOB INCLUDE "./header/*.h")
+file(GLOB INCLUDE "./header/*.hpp")
 add_library(Vector STATIC ${SRC})
 target_link_libraries(Vector PUBLIC Core)
-target_include_directories(Vector PUBLIC ./header)
+target_include_directories(Vector PUBLIC ./header/)

@@ -1,7 +1,7 @@
-#include "Polygon.h"
-#include "Vertex.h"
-#include "Edge.h"
-#include "Face.h"
+#include "Polygon.hpp"
+#include "Vertex.hpp"
+#include "Edge.hpp"
+#include "Face.hpp"
 namespace GeometricVision::DCEL
 {
     template <class type, size_t dim>
