@@ -210,9 +210,28 @@ namespace GeometricVision::PolygonPartition
             }
             else if (curr_pt_cart==VERTEX_CATEGORY::INVALID)
             {
-
+                return;
             }
         }
-
+    std::vector<std::vector<point::point2d>>poly_verts;
+        for (auto face_ptr:poly->get_face_list())
+        {
+            auto first_edge=face_ptr->outer;
+            if (first_edge)
+            {
+                std::vector<point::point2d>verts;
+                verts.push_back(first_edge->origin->point);
+                auto next_edge=first_edge->next;
+                while (next_edge!=first_edge)
+                {
+                    verts.push_back(next_edge->origin->point);
+                }
+                poly_verts.push_back(verts);
+            }
+        }
+        for (auto poly_vert:poly_verts)
+        {
+            mono_polys.push_back(std::make_shared<DCEL::Polygon<type,dim>>(poly));
+        }
     }
 }
