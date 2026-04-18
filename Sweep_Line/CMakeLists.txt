@@ -1,0 +1,2 @@
+add_subdirectory(Monotone_polygon_partitioning)
+add_subdirectory(Line_segment_intersection)
