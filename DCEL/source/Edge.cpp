@@ -8,7 +8,7 @@ namespace GeometricVision::DCEL
     }
 
     template <class type, size_t dim>
-    Edge<type, dim>::Edge( std::weak_ptr<Vertex<type, dim>>origin,  std::weak_ptr<Edge> twin,
+    Edge<type, dim>::Edge( vertex_weak_ptr<type,dim>origin,  std::weak_ptr<Edge> twin,
                            std::weak_ptr<Edge> next,  std::weak_ptr<Edge> prev, std::weak_ptr<Face<type,dim>> face):origin(origin),
         twin(twin),next(next),prev(prev),face(face)
     {

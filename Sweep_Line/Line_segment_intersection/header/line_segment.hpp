@@ -14,4 +14,7 @@ namespace GeometricVision::LineSegmentIntersection
     };
     typedef LineSegment<double,DIM2> Segment2D;
     typedef LineSegment<double,DIM3> Segment3D;
+    typedef std::weak_ptr<LineSegment<double,DIM2>> line_seg_weak_ptr;
+    typedef std::shared_ptr<LineSegment<double,DIM2>> line_seg_shared_ptr;
+    typedef std::unique_ptr<LineSegment<double,DIM2>> line_seg_unique_ptr;
 }

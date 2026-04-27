@@ -40,4 +40,10 @@ namespace GeometricVision::LineSegmentIntersection
     {
         return base_map.empty();
     }
+
+    template <typename T>
+    T CustomPriorityQueue<T>::top_event()
+    {
+        return base_map.begin();
+    }
 }
