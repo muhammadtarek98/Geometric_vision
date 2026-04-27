@@ -1,5 +1,5 @@
 file(GLOB SRC "./source/*.cpp")
 file(GLOB INCLUDE "./header/*.hpp")
 add_library(LineSegmentIntersection STATIC ${SRC})
-target_link_libraries(LineSegmentIntersection PUBLIC Core Vector Point)
+target_link_libraries(LineSegmentIntersection PUBLIC Core Vector Point Line)
 target_include_directories(LineSegmentIntersection PUBLIC ./header)
