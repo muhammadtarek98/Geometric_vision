@@ -10,6 +10,7 @@ namespace GeometricVision
         int orientation2d(const Point::point2d &p1, const Point::point2d &p2,const Point::point2d &p3);
         bool left2d(const Point::point2d &p1, const Point::point2d &p2,const Point::point2d &p3);
         bool left3d(const Point::point3d &p1, const Point::point3d &p2,const Point::point3d &p3);
+        bool right2d(const Point::point2d& p1, const Point::point2d& p2, const Point::point2d& p3);
         bool right3d(const Point::point3d &p1, const Point::point3d &p2,const Point::point3d &p3);
         bool left_or_beyond_2d(const Point::point2d &p1, const Point::point2d &p2,const Point::point2d &p3);
         bool left_or_beyond_3d(const Point::point3d &p1, const Point::point3d &p2,const Point::point3d &p3);

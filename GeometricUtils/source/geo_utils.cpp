@@ -99,9 +99,11 @@ namespace GeometricVision::GeometricUtils
     bool left3d(const point3d& p1, const point3d& p2, const point3d& p3)
     {
         return  orientation3d(p1,p2,p3)==static_cast<int>(RELATIVE_POINT_POSITION::LEFT);
-
     }
-
+    bool right2d(const point2d& p1, const point2d& p2, const point2d& p3)
+    {
+        return orientation2d(p1,p2,p3)==static_cast<int>(RELATIVE_POINT_POSITION::RIGHT);
+    }
     bool right3d(const point3d& p1, const point3d& p2, const point3d& p3)
     {
         return orientation3d(p1,p2,p3)==static_cast<int>(RELATIVE_POINT_POSITION::RIGHT);

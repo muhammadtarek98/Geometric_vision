@@ -1,5 +1,5 @@
 #include "gift_warpping.hpp"
-namespace GeometricVision::ConvexHull
+namespace GeometricVision::ConvexHull::ConvexHull2D
 {
     std::vector<Point::point2d> gift_wrapping2D(const std::vector<Point::point2d>& point_set)
     {

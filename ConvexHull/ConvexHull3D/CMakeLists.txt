@@ -1,0 +1,5 @@
+file(GLOB SRC "./source/*.cpp")
+file(GLOB INCLUDE "./include/*.hpp")
+add_library(ConvexHull3D STATIC ${SRC})
+target_include_directories(ConvexHull3D PUBLIC ./header)
+target_link_libraries(ConvexHull3D PUBLIC Point Core Vector GeometricUtils Distance)
