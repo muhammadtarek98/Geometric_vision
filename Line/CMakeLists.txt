@@ -1,0 +1,5 @@
+file(GLOB SRC "./source/*.cpp")
+file(GLOB INCLUDE "./header/*.hpp")
+add_library(Line STATIC ${SRC})
+target_link_libraries(Line PUBLIC Core Vector GeometricUtils DCEL)
+target_include_directories(Line PUBLIC ./header)

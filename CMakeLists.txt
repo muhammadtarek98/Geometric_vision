@@ -3,17 +3,18 @@ project(GeometricVision LANGUAGES CXX C)
 set(CMAKE_CXX_STANDARD 20)
 find_package(GTest REQUIRED)
 enable_testing()
-add_subdirectory(core)
-add_subdirectory(vector)
-add_subdirectory(point)
-add_subdirectory(plane)
-add_subdirectory(line)
-add_subdirectory(intersection)
+add_subdirectory(Core)
+add_subdirectory(Vector)
+add_subdirectory(Point)
+add_subdirectory(Plane)
+add_subdirectory(Line)
+add_subdirectory(Intersection)
 add_subdirectory(Angle)
-add_subdirectory(geometric_utils)
-add_subdirectory(distance)
+add_subdirectory(GeometricUtils)
+add_subdirectory(Distance)
 add_subdirectory(DCEL)
-add_subdirectory(Sweep_Line)
+add_subdirectory(SweepLine)
+add_subdirectory(ConvexHull)
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME}
     Core
@@ -23,10 +24,10 @@ target_link_libraries(${PROJECT_NAME}
     Line
     Plane
     Intersection
-    Geometric_utils
+    GeometricUtils
     Distance
     DCEL
-    Monotone_partition
+    SweepLine
     GTest::gtest_main)
 find_program(VALGRIND_PROGRAM valgrind)
 if(VALGRIND_PROGRAM)

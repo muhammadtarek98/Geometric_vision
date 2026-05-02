@@ -170,46 +170,46 @@ TEST(VectorTest, Orientation2D) {
 // ============================================================================
 
 TEST(PointTest, Sorting) {
-    std::vector<point::point2d> pts = {
+    std::vector<Point::point2d> pts = {
         {3,1}, {1,3}, {2,2}, {1,1}
     };
 
     // left-right top-bottom (x asc, y asc)
-    std::sort(pts.begin(), pts.end(), point::sort_point2d_left_right_top_bottom);
-    std::vector<point::point2d> expected_lrtb = {{1,1}, {1,3}, {2,2}, {3,1}};
+    std::sort(pts.begin(), pts.end(), Point::sort_point2d_left_right_top_bottom);
+    std::vector<Point::point2d> expected_lrtb = {{1,1}, {1,3}, {2,2}, {3,1}};
     for (size_t i = 0; i < pts.size(); ++i) {
         EXPECT_DOUBLE_EQ(pts[i][0], expected_lrtb[i][0]);
         EXPECT_DOUBLE_EQ(pts[i][1], expected_lrtb[i][1]);
     }
 
     // top-bottom left-right (y desc, x asc)
-    std::sort(pts.begin(), pts.end(), point::sort_point2d_top_bottom_left_right);
-    std::vector<point::point2d> expected_tblr = {{1,3}, {2,2}, {1,1}, {3,1}};
+    std::sort(pts.begin(), pts.end(), Point::sort_point2d_top_bottom_left_right);
+    std::vector<Point::point2d> expected_tblr = {{1,3}, {2,2}, {1,1}, {3,1}};
     for (size_t i = 0; i < pts.size(); ++i) {
         EXPECT_DOUBLE_EQ(pts[i][0], expected_tblr[i][0]);
         EXPECT_DOUBLE_EQ(pts[i][1], expected_tblr[i][1]);
     }
 
     // sort by x only
-    std::sort(pts.begin(), pts.end(), point::sort_point2d_by_x);
-    std::vector<point::point2d> expected_x = {{1,3}, {1,1}, {2,2}, {3,1}};
+    std::sort(pts.begin(), pts.end(), Point::sort_point2d_by_x);
+    std::vector<Point::point2d> expected_x = {{1,3}, {1,1}, {2,2}, {3,1}};
     for (size_t i = 0; i < pts.size(); ++i) {
         EXPECT_DOUBLE_EQ(pts[i][0], expected_x[i][0]);
     }
 
     // sort by y only
-    std::sort(pts.begin(), pts.end(), point::sort_point2d_by_y);
-    std::vector<point::point2d> expected_y = {{1,1}, {3,1}, {2,2}, {1,3}};
+    std::sort(pts.begin(), pts.end(), Point::sort_point2d_by_y);
+    std::vector<Point::point2d> expected_y = {{1,1}, {3,1}, {2,2}, {1,3}};
     for (size_t i = 0; i < pts.size(); ++i) {
         EXPECT_DOUBLE_EQ(pts[i][1], expected_y[i][1]);
     }
 }
 
 TEST(PointTest, Sorting3D) {
-    std::vector<point::point3d> pts = {
+    std::vector<Point::point3d> pts = {
         {3,1,0}, {1,3,0}, {2,2,0}, {1,1,0}
     };
-    std::sort(pts.begin(), pts.end(), point::sort_point3d_top_bottom_left_right);
+    std::sort(pts.begin(), pts.end(), Point::sort_point3d_top_bottom_left_right);
     // Based on implementation: y desc, x asc
     // (1,3,0), (2,2,0), (1,1,0), (3,1,0)
     EXPECT_DOUBLE_EQ(pts[0][1], 3.0);
@@ -273,9 +273,9 @@ TEST(PlaneTest, ConstructionFromNormal) {
 }
 
 TEST(PlaneTest, ConstructionFromPoints) {
-    point::point3d p1(1,0,0);
-    point::point3d p2(0,1,0);
-    point::point3d p3(0,0,1);
+    Point::point3d p1(1,0,0);
+    Point::point3d p2(0,1,0);
+    Point::point3d p3(0,0,1);
     plane::Plane<float> plane(p1, p2, p3);
 
     auto n = plane.get_normal();
@@ -285,7 +285,7 @@ TEST(PlaneTest, ConstructionFromPoints) {
     double len = sqrt(n[0]*n[0] + n[1]*n[1] + n[2]*n[2]);
     EXPECT_NEAR(len, 1.0, 1e-6);
 
-    // Check that each point satisfies the plane equation n·x = d
+    // Check that each Point satisfies the plane equation n·x = d
     EXPECT_NEAR(n[0]*p1[0] + n[1]*p1[1] + n[2]*p1[2], d, 1e-4);
     EXPECT_NEAR(n[0]*p2[0] + n[1]*p2[1] + n[2]*p2[2], d, 1e-4);
     EXPECT_NEAR(n[0]*p3[0] + n[1]*p3[1] + n[2]*p3[2], d, 1e-4);
@@ -296,8 +296,8 @@ TEST(PlaneTest, ConstructionFromPoints) {
 // ============================================================================
 
 TEST(AngleTest, Lines2D) {
-    point::point2d l1s(0,3), l1e(2,4);
-    point::point2d l2s(0,5), l2e(-2,6);
+    Point::point2d l1s(0,3), l1e(2,4);
+    Point::point2d l2s(0,5), l2e(-2,6);
     Line::line2d l1(l1s, l1e);
     Line::line2d l2(l2s, l2e);
     double ang = Angle::calculate_angle_lines_2d(l1, l2);
@@ -307,7 +307,7 @@ TEST(AngleTest, Lines2D) {
 }
 
 TEST(AngleTest, PlaneAndLine) {
-    point::point3d l1s(-3,-4,-5), l1e(4,4,5);
+    Point::point3d l1s(-3,-4,-5), l1e(4,4,5);
     Line::line3d l(l1s, l1e);  // correct: two points
 
     vector::vect3D plane_norm(-14.26, 9.32, 18.89);
@@ -323,8 +323,8 @@ TEST(AngleTest, PlaneAndLine) {
 }
 
 TEST(AngleTest, Lines3D) {
-    point::point3d l1s(0,0,0), l1e(1,0,0);
-    point::point3d l2s(0,0,0), l2e(0,1,0);
+    Point::point3d l1s(0,0,0), l1e(1,0,0);
+    Point::point3d l2s(0,0,0), l2e(0,1,0);
     Line::line3d l1(l1s, l1e);
     Line::line3d l2(l2s, l2e);
     double ang = Angle::calculate_angle_lines_3d(l1, l2);
@@ -345,18 +345,18 @@ TEST(AngleTest, PlaneAndPlane) {
 // ============================================================================
 
 TEST(DistanceTest, PointToLine) {
-    point::point3d p(1,2,3);
-    point::point3d l1(0,0,0), l2(1,0,0);
+    Point::point3d p(1,2,3);
+    Point::point3d l1(0,0,0), l2(1,0,0);
     Line::line3d l(l1, l2);
     float d = Distance::distance_line_and_point(l, p);
     EXPECT_NEAR(d, std::sqrt(13.0), 1e-4);
 }
 
 TEST(DistanceTest, PointToPlane) {
-    point::point3d point(2,3,4);
+    Point::point3d Point(2,3,4);
     vector::vect3D normal(1,0,0);
     plane::Plane3D p(normal, 5.0f);
-    float d = Distance::distance_point_plane(point, p);
+    float d = Distance::distance_point_plane(Point, p);
     EXPECT_FLOAT_EQ(d, -3.0f);
 }
 
@@ -367,45 +367,45 @@ TEST(DistanceTest, PointToPlane) {
 TEST(GeoUtilsTest, Orientation3D) {
     using GeometricUtils::orientation3d;
     using enum RELATIVE_POINT_POSITION;
-    point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0);
+    Point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0);
     EXPECT_EQ(orientation3d(p1, p2, p3), static_cast<int>(LEFT));
 
-    point::point3d p4(0,0,0), p5(1,0,0), p6(2,0,0);
+    Point::point3d p4(0,0,0), p5(1,0,0), p6(2,0,0);
     EXPECT_EQ(orientation3d(p4, p5, p6), static_cast<int>(BEYOND));
 }
 
 TEST(GeoUtilsTest, LeftRight) {
     using GeometricUtils::left3d;
     using GeometricUtils::right3d;
-    point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0);
+    Point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0);
     EXPECT_TRUE(left3d(p1, p2, p3));
     EXPECT_FALSE(right3d(p1, p2, p3));
 }
 
 TEST(GeoUtilsTest, AreaTriangle3D) {
-    point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0);
+    Point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0);
     double area = GeometricUtils::area_triangle_3d(p1, p2, p3);
     EXPECT_DOUBLE_EQ(area, 0.5);
 }
 
 TEST(GeoUtilsTest, Collinear) {
-    point::point3d p1(0,0,0), p2(1,0,0), p3(2,0,0);
+    Point::point3d p1(0,0,0), p2(1,0,0), p3(2,0,0);
     EXPECT_TRUE(GeometricUtils::collinear(p1, p2, p3));
-    point::point3d p4(0,0,0), p5(1,0,0), p6(0,1,0);
+    Point::point3d p4(0,0,0), p5(1,0,0), p6(0,1,0);
     EXPECT_FALSE(GeometricUtils::collinear(p4, p5, p6));
     // Note: This test currently fails because of a bug in collinear implementation.
     // The function uses an incorrect cross product term (x1*y2 - x2 - y1).
 }
 
 TEST(GeoUtilsTest, Coplanar) {
-    point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0), p4(1,1,0);
+    Point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0), p4(1,1,0);
     EXPECT_TRUE(GeometricUtils::coplanar(p1, p2, p3, p4));
-    point::point3d p5(0,0,0), p6(1,0,0), p7(0,1,0), p8(0,0,1);
+    Point::point3d p5(0,0,0), p6(1,0,0), p7(0,1,0), p8(0,0,1);
     EXPECT_FALSE(GeometricUtils::coplanar(p5, p6, p7, p8));
 }
 
 TEST(GeoUtilsTest, More2D) {
-    point::point2d p1(0,0), p2(1,0), p3(0,1);
+    Point::point2d p1(0,0), p2(1,0), p3(0,1);
     EXPECT_EQ(GeometricUtils::orientation2d(p1, p2, p3), static_cast<int>(RELATIVE_POINT_POSITION::LEFT));
     EXPECT_TRUE(GeometricUtils::left2d(p1, p2, p3));
     EXPECT_TRUE(GeometricUtils::left_or_beyond_2d(p1, p2, p3));
@@ -413,7 +413,7 @@ TEST(GeoUtilsTest, More2D) {
 }
 
 TEST(GeoUtilsTest, More3D) {
-    point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0);
+    Point::point3d p1(0,0,0), p2(1,0,0), p3(0,1,0);
     EXPECT_TRUE(GeometricUtils::left_or_beyond_3d(p1, p2, p3));
     EXPECT_TRUE(GeometricUtils::left_or_between_3d(p1, p2, p3));
 }
@@ -423,9 +423,9 @@ TEST(GeoUtilsTest, More3D) {
 // ============================================================================
 
 TEST(IntersectionTest, Lines2D_Intersect) {
-    point::point2d p1(0,0), p2(2,2);
-    point::point2d p3(0,2), p4(2,0);
-    point::point2d result;
+    Point::point2d p1(0,0), p2(2,2);
+    Point::point2d p3(0,2), p4(2,0);
+    Point::point2d result;
     bool ok = Intersection::intersection(p1, p2, p3, p4, result);
     EXPECT_TRUE(ok);
     EXPECT_NEAR(result[0], 1.0, 1e-6);
@@ -433,19 +433,19 @@ TEST(IntersectionTest, Lines2D_Intersect) {
 }
 
 TEST(IntersectionTest, Lines2D_Parallel) {
-    point::point2d p1(0,0), p2(1,0);
-    point::point2d p3(0,1), p4(1,1);
-    point::point2d result;
+    Point::point2d p1(0,0), p2(1,0);
+    Point::point2d p3(0,1), p4(1,1);
+    Point::point2d result;
     bool ok = Intersection::intersection(p1, p2, p3, p4, result);
     EXPECT_FALSE(ok);
 }
 
 TEST(IntersectionTest, PlaneLine) {
-    point::point3d l1(0,0,0), l2(1,1,1);
+    Point::point3d l1(0,0,0), l2(1,1,1);
     Line::line3d l(l1, l2);
     vector::vect3D normal(1,0,0);
     plane::Plane3D p(normal, 2.0f);
-    point::point3d ip = Intersection::plane_line_intersection(l, p);
+    Point::point3d ip = Intersection::plane_line_intersection(l, p);
     EXPECT_NEAR(ip[0], 2.0, 1e-6);
     EXPECT_NEAR(ip[1], 2.0, 1e-6);
     EXPECT_NEAR(ip[2], 2.0, 1e-6);
@@ -468,9 +468,9 @@ TEST(IntersectionTest, PlanePlane) {
 }
 
 TEST(IntersectionTest, Lines3D) {
-    point::point3d p1(0,0,0), p2(2,2,2);
-    point::point3d p3(0,2,0), p4(2,0,2);
-    point::point3d result;
+    Point::point3d p1(0,0,0), p2(2,2,2);
+    Point::point3d p3(0,2,0), p4(2,0,2);
+    Point::point3d result;
     bool ok = Intersection::intersection(Line::line3d(p1,p2), Line::line3d(p3,p4), result);
     EXPECT_TRUE(ok);
     EXPECT_NEAR(result[0], 1.0, 1e-6);

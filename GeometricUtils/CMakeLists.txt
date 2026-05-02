@@ -1,0 +1,5 @@
+file(GLOB SRC "./source/*.cpp")
+file(GLOB INCLUDE "./header/*.hpp")
+add_library(GeometricUtils STATIC ${SRC})
+target_link_libraries(GeometricUtils PUBLIC Core Line Point )
+target_include_directories(GeometricUtils PUBLIC ./header)
