@@ -3,7 +3,7 @@
 #include "vector.hpp"
 namespace GeometricVision::plane
 {
-    template<class coord_type>
+    template<class dtype>
     class Plane
     {
     private:

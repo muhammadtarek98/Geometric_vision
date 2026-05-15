@@ -1,24 +1,24 @@
 #include "line.hpp"
 namespace GeometricVision::Line
 {
-    template<class coord_type,size_t dim>
-    Line<coord_type,dim>::Line(vector::Vector<coord_type,dim>&p1,vector::Vector<coord_type,dim>&p2)
+    template<class dtype,size_t dim>
+    Line<dtype,dim>::Line(vector::Vector<dtype,dim>&p1,vector::Vector<dtype,dim>&p2)
     {
         direction=p2-p1;
         direction.normalization();
         point=p1;
     }
 
-    template <class coord_type, size_t dim>
-    void Line<coord_type, dim>::set_direction(vector::Vector<coord_type, dim>& dir)
+    template <class dtype, size_t dim>
+    void Line<dtype, dim>::set_direction(vector::Vector<dtype, dim>& dir)
     {
         this->direction.assign(X,dir[X]);
         this->direction.assign(Y,dir[Y]);
         this->direction.assign(Z,dir[Z]);
     }
 
-    template <class coord_type, size_t dim>
-    void Line<coord_type, dim>::set_point(Point::point3d& point)
+    template <class dtype, size_t dim>
+    void Line<dtype, dim>::set_point(Point::point3d& point)
     {
         this->point.assign(X,point[X]);
         this->point.assign(Y,point[Y]);
@@ -26,13 +26,13 @@ namespace GeometricVision::Line
     }
 
 
-    template <class coord_type, size_t dim>
-    vector::Vector<coord_type,dim> Line<coord_type, dim>::Get_direction()   const
+    template <class dtype, size_t dim>
+    vector::Vector<dtype,dim> Line<dtype, dim>::Get_direction()   const
     {
         return this->direction;
     }
-    template <class coord_type, size_t dim>
-    vector::Vector<coord_type, dim> Line<coord_type, dim>::Get_point() const
+    template <class dtype, size_t dim>
+    vector::Vector<dtype, dim> Line<dtype, dim>::Get_point() const
     {
         return this->point;
     }

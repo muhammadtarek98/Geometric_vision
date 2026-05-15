@@ -1,8 +1,8 @@
 #include "vector.hpp"
 namespace GeometricVision::vector
 {
-    template <class coordinate_type, size_t dim>
-    bool Vector<coordinate_type, dim>::operator==(const Vector<coordinate_type, dim>&other) const
+    template <typename  dtype, size_t dim>
+    bool Vector<dtype, dim>::operator==(const Vector<dtype, dim>&other) const
     {
         for (size_t i=0;i<dim;i++)
         {
@@ -14,67 +14,67 @@ namespace GeometricVision::vector
         return true ;
     }
 
-    template <class coordinate_type, size_t dim>
-    bool Vector<coordinate_type, dim>::operator!=(const Vector<coordinate_type, dim>& vect)
+    template <typename dtype, size_t dim>
+    bool Vector<dtype, dim>::operator!=(const Vector<dtype, dim>& vect)
     {
         return !(*this==vect);
     }
 
-    template <class coordinate_type, size_t dim>
-    Vector<coordinate_type, dim> Vector<coordinate_type, dim>::operator+(const Vector<coordinate_type, dim>& vect) const
+    template <typename dtype, size_t dim>
+    Vector<dtype, dim> Vector<dtype, dim>::operator+(const Vector<dtype, dim>& vect) const
     {
-        std::array<coordinate_type,dim> coords;
+        std::array<dtype,dim> coords;
         for (size_t i=0;i<dim;i++)
         {
             coords[i]=this->coords[i]+vect[i];
         }
-        return Vector<coordinate_type,dim>(coords);
+        return Vector<dtype,dim>(coords);
     }
-    template <class coordinate_type, size_t dim>
-    Vector<coordinate_type, dim> Vector<coordinate_type, dim>::operator-(const Vector<coordinate_type, dim>& other) const
+    template <typename dtype, size_t dim>
+    Vector<dtype, dim> Vector<dtype, dim>::operator-(const Vector<dtype, dim>& other) const
     {
-        std::array<coordinate_type,dim> coords;
+        std::array<dtype,dim> coords;
         for (size_t i=0;i<dim;i++)
         {
             coords[i]=this->coords[i]-other[i];
         }
         return Vector(coords);
     }
-    template<class coordinate_type,size_t dim>
-    signed int Vector<coordinate_type, dim>::num_dims()
+    template<typename dtype,size_t dim>
+    signed int Vector<dtype, dim>::num_dims()
     {
         return this->coords.size();
     }
 
-    template <class coordinate_type, size_t dims>
-    auto Vector<coordinate_type, dims>::dtype()
+    template <typename dtype, size_t dim>
+    auto Vector<dtype, dim>::get_dtype()
     {
-        return typeid(coordinate_type).name();
+        return typeid(this->coords[0]).name();
     }
 
-    template <class coordinate_type, size_t dims>
-    Vector<coordinate_type, dims> Vector<coordinate_type, dims>::operator*(const Vector<coordinate_type, dims>& vect)
+    template <typename dtype, size_t dim>
+    Vector<dtype, dim> Vector<dtype, dim>::operator*(const Vector<dtype, dim>& vect)
     {
-        std::array<coordinate_type,dims> coords;
-        for (size_t i=0;i<dims;i++)
+        std::array<dtype,dim> coords;
+        for (size_t i=0;i<dim;i++)
         {
             coords[i]=this->coords[i]*vect[i];
         }
         return Vector(coords);
     }
-    template <class coordinate_type, size_t dims>
-    Vector<coordinate_type, dims> Vector<coordinate_type, dims>::operator*(const coordinate_type scalar)
+    template <typename dtype, size_t dim>
+    Vector<dtype, dim> Vector<dtype, dim>::operator*(const dtype scalar)
     {
-        std::array<coordinate_type,dims> coords;
-        for (size_t i=0;i<dims;i++)
+        std::array<dtype,dim> coords;
+        for (size_t i=0;i<dim;i++)
         {
             coords[i]=this->coords[i]*scalar;
         }
         return Vector(coords);
     }
 
-    template <class coordinate_type, size_t dim>
-    bool Vector<coordinate_type, dim>::operator>(const Vector<coordinate_type, dim>& vect) const
+    template <typename dtype, size_t dim>
+    bool Vector<dtype, dim>::operator>(const Vector<dtype, dim>& vect) const
     {
         for (auto i=0;i<dim;i++)
         {
@@ -91,8 +91,8 @@ namespace GeometricVision::vector
 
     }
 
-    template <class coordinate_type, size_t dim>
-    bool Vector<coordinate_type, dim>::operator<(const Vector<coordinate_type, dim>& vect) const
+    template <typename dtype, size_t dim>
+    bool Vector<dtype, dim>::operator<(const Vector<dtype, dim>& vect) const
     {
         for (auto i=0;i<dim;i++)
         {
@@ -108,28 +108,28 @@ namespace GeometricVision::vector
         return false;
     }
 
-    template<class coordinate_type,size_t dims>
-    coordinate_type Vector<coordinate_type,dims>::operator[](int idx) const
+    template<typename dtype,size_t dim>
+    dtype Vector<dtype,dim>::operator[](int idx) const
     {
         if (idx>this->coords.size())
         {
-            return coordinate_type();
+            return dtype();
         }
         return this->coords[idx];
     }
-    template<class coordinate_type,size_t dims>
-    void Vector<coordinate_type, dims>::assign(int dim, coordinate_type val)
+    template<typename dtype,size_t dim>
+    void Vector<dtype, dim>::assign(int idx, dtype val)
     {
-        if (dim>this->coords.size())
+        if (idx>this->coords.size())
         {
             std::cout<<"dim index error\n";
         }
-        this->coords[dim]=val;
+        this->coords[idx]=val;
     }
 
-    template <class coordinate_type, size_t dims>
-    double Vector<coordinate_type, dims>::dot_product(const Vector<coordinate_type, dims>& vect1,
-                                                      const Vector<coordinate_type, dims>& vect2)
+    template <typename dtype, size_t dim>
+    double Vector<dtype, dim>::dot_product(const Vector<dtype, dim>& vect1,
+                                            const Vector<dtype, dim>& vect2)
     {
         if (vect1.coords.size()!=vect2.coords.size())
         {
@@ -142,23 +142,32 @@ namespace GeometricVision::vector
         }
         return prod;
     }
-    template<class coordinate_type,size_t dims>
-    float Vector<coordinate_type,dims>::magnitude() const
+    double dot_product(const vect3D &vect1,const vect3D &vect2)
+    {
+        return Vector<double>::dot_product(vect1,vect2);
+    }
+    double  dot_product(const vect2D &vect1,const vect2D &vect2)
+    {
+        return Vector<double,DIM2>::dot_product(vect1,vect2);
+    }
+
+    template<class dtype,size_t dim>
+    float Vector<dtype,dim>::magnitude() const
     {
         float mag=0.0;
-        for (auto i =0;i<dims;i++)
+        for (auto i =0;i<dim;i++)
         {
             mag+=pow(this->coords[i],2);
         }
         return sqrtf(mag);
     }
 
-    template <class coordinate_type, size_t dims>
-    void Vector<coordinate_type, dims>::normalization()
+    template <class dtype, size_t dim>
+    void Vector<dtype, dim>::normalization()
     {
         const float mag=this->magnitude();
 
-        for (auto i=0;i<dims;i++)
+        for (auto i=0;i<dim;i++)
         {
             this->assign(i,this->coords[i]/mag);
         }

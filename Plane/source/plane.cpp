@@ -1,8 +1,8 @@
 #include "plane.hpp"
 namespace GeometricVision::plane
 {
-    template <class coord_type>
-    Plane<coord_type>::Plane(const Point::point3d& p1,const  Point::point3d& p2,const  Point::point3d& p3)
+    template <class dtype>
+    Plane<dtype>::Plane(const Point::point3d& p1,const  Point::point3d& p2,const  Point::point3d& p3)
     {
         auto p12=p2-p1;
         auto p23=p3-p2;
@@ -10,8 +10,8 @@ namespace GeometricVision::plane
         this->normal.normalization();
         this->d=vector::vect3D::dot_product(this->normal,p1);
     }
-    /*template <class coord_type>
-        Plane<coord_type>::Plane(Point::point3d p1,Point::point3d p2,Point::point3d p3)
+    /*template <class dtype>
+        Plane<dtype>::Plane(Point::point3d p1,Point::point3d p2,Point::point3d p3)
         {
             auto p12=p2-p1;
             auto p23=p3-p2;
@@ -19,8 +19,8 @@ namespace GeometricVision::plane
             this->normal.normalization();
             this->d=vector::vect3D::dot_product(this->normal,p1);
         }*/
-    template <class coord_type>
-    Plane<coord_type>::Plane(Point::point3d &&p1, Point::point3d &&p2, Point::point3d &&p3)
+    template <class dtype>
+    Plane<dtype>::Plane(Point::point3d &&p1, Point::point3d &&p2, Point::point3d &&p3)
     {
         auto p12=p2-p1;
         auto p23=p3-p2;
@@ -28,24 +28,24 @@ namespace GeometricVision::plane
         this->normal.normalization();
         this->d=vector::vect3D::dot_product(this->normal,p1);
     }
-    template <class coord_type>
-    Plane<coord_type>::Plane(const vector::vect3D& vect, float constant):normal(vect),d(constant)
+    template <class dtype>
+    Plane<dtype>::Plane(const vector::vect3D& vect, float constant):normal(vect),d(constant)
     {
         this->normal.normalization();
     }
-    template <class coord_type>
-    Plane<coord_type>::Plane(vector::vect3D&& vect, float constant):normal(vect),d(constant)
+    template <class dtype>
+    Plane<dtype>::Plane(vector::vect3D&& vect, float constant):normal(vect),d(constant)
     {
         this->normal.normalization();
     }
-    template <class coord_type>
-    float Plane<coord_type>::GetD() const
+    template <class dtype>
+    float Plane<dtype>::GetD() const
     {
         return this->d;
     }
 
-    template <class coord_type>
-    vector::vect3D Plane<coord_type>::get_normal() const
+    template <class dtype>
+    vector::vect3D Plane<dtype>::get_normal() const
     {
         return this->normal;
     }

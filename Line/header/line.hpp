@@ -3,20 +3,20 @@
 #include "vector.hpp"
 namespace GeometricVision::Line
 {
-    template<class coord_type,size_t dim=DIM3>
+    template<class dtype,size_t dim=DIM3>
     class Line
     {
     private:
-        vector::Vector<coord_type,dim>point;
-        vector::Vector<coord_type,dim>direction;
+        vector::Vector<dtype,dim>point;
+        vector::Vector<dtype,dim>direction;
     public:
         Line()=default;
-        Line(vector::Vector<coord_type,dim>&p1,vector::Vector<coord_type,dim>&p2);
-        Line(vector::Vector<coord_type,dim>&&p1,vector::Vector<coord_type,dim>&&p2);
-        void set_direction(vector::Vector<coord_type,dim> &dir);
+        Line(vector::Vector<dtype,dim>&p1,vector::Vector<dtype,dim>&p2);
+        Line(vector::Vector<dtype,dim>&&p1,vector::Vector<dtype,dim>&&p2);
+        void set_direction(vector::Vector<dtype,dim> &dir);
         void set_point(Point::point3d &point);
-        vector::Vector<coord_type,dim> Get_direction() const;
-        vector::Vector<coord_type,dim>Get_point() const;
+        vector::Vector<dtype,dim> Get_direction() const;
+        vector::Vector<dtype,dim>Get_point() const;
         virtual ~Line()=default;
 
 

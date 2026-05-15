@@ -1,64 +1,64 @@
 #include "Edge.hpp"
 namespace GeometricVision::DCEL
 {
-    template<class type,size_t dim>
-    Edge<type,dim>::Edge()
+    template<class dtype,size_t dim>
+    Edge<dtype,dim>::Edge()
     {
         this->id=0;
     }
 
-    template <class type, size_t dim>
-    Edge<type, dim>::Edge( vertex_weak_ptr<type,dim>origin,  std::weak_ptr<Edge> twin,
-                           std::weak_ptr<Edge> next,  std::weak_ptr<Edge> prev, std::weak_ptr<Face<type,dim>> face):origin(origin),
+    template <class dtype, size_t dim>
+    Edge<dtype, dim>::Edge( vertex_weak_ptr<dtype,dim>origin,  edge_weak_ptr<dtype,dim> twin,
+                           edge_weak_ptr<dtype,dim> next,  edge_weak_ptr<dtype,dim> prev, face_weak_ptr<dtype,dim> face):origin(origin),
         twin(twin),next(next),prev(prev),face(face)
     {
         ++(this->id);
     }
-    template <class type, size_t dim>
-    Edge<type, dim>::Edge(const std::weak_ptr<Vertex<type, dim>>&origin,
-                          const std::weak_ptr<Edge> &twin, const std::weak_ptr<Edge>& next,
-                          const std::weak_ptr<Edge>& prev,const std::weak_ptr<Face<type, dim>>& face) : origin(origin),
+    template <class dtype, size_t dim>
+    Edge<dtype, dim>::Edge(const vertex_weak_ptr<dtype,dim>&origin,
+                          const edge_weak_ptr<dtype,dim>&twin, const edge_weak_ptr<dtype,dim>& next,
+                          const edge_weak_ptr<dtype,dim> &prev,const face_weak_ptr<dtype,dim>& face) : origin(origin),
         twin(twin),next(next),prev(prev),face(face)
     {
         ++(this->id);
     }
 
-    template <class type, size_t dim>
-    Edge<type, dim>::Edge(std::weak_ptr<Vertex<type, dim>>origin):origin(origin)
+    template <class dtype, size_t dim>
+    Edge<dtype, dim>::Edge(vertex_weak_ptr<dtype,dim>origin):origin(origin)
     {
         ++(this->id);
     }
-    template <class type, size_t dim>
-    Edge<type, dim>::Edge(const std::weak_ptr<Vertex<type, dim>>&origin):origin(origin)
+    template <class dtype, size_t dim>
+    Edge<dtype, dim>::Edge(const vertex_weak_ptr<dtype,dim>&origin):origin(origin)
     {
         ++(this->id);
     }
 
-    template <class type, size_t dim>
-    std::weak_ptr<Vertex<type, dim>> Edge<type, dim>::get_destination()
+    template <class dtype, size_t dim>
+    vertex_weak_ptr<dtype,dim>Edge<dtype, dim>::get_destination()
     {
         return this->get_twin();
     }
 
-    template <class type, size_t dim>
-    std::weak_ptr<Vertex<type, dim>> Edge<type, dim>::get_prev()
+    template <class dtype, size_t dim>
+    vertex_weak_ptr<dtype,dim>Edge<dtype, dim>::get_prev()
     {
         if (auto p = this->prev.lock()) return p->origin;
-        return std::weak_ptr<Vertex<type, dim>>();
+        return vertex_weak_ptr<dtype,dim>();
     }
 
-    template <class type, size_t dim>
-    std::weak_ptr<Vertex<type, dim>> Edge<type, dim>::get_twin()
+    template <class dtype, size_t dim>
+    vertex_weak_ptr<dtype,dim>Edge<dtype, dim>::get_twin()
     {
         if (auto t = this->twin.lock()) return t->origin;
-        return std::weak_ptr<Vertex<type, dim>>();
+        return vertex_weak_ptr<dtype,dim>();
     }
 
-    template <class type, size_t dim>
-    std::weak_ptr<Vertex<type, dim>> Edge<type, dim>::get_next()
+    template <class dtype, size_t dim>
+    vertex_weak_ptr<dtype,dim>Edge<dtype, dim>::get_next()
     {
         if (auto n = this->next.lock()) return n->origin;
-        return std::weak_ptr<Vertex<type, dim>>();
+        return vertex_weak_ptr<dtype, dim>();
     }
 
     template class Edge<double, DIM3>;

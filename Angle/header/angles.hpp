@@ -5,8 +5,8 @@
 namespace GeometricVision
 {
     namespace Angle{
-        template<class T,size_t dim>
-        static double get_angle(vector::Vector<T,dim>v1,vector::Vector<T,dim>v2);
+        template<class dtype,size_t dim>
+         double get_angle(vector::Vector<dtype,dim>v1,vector::Vector<dtype,dim>v2);
         double calculate_angle_lines_2d(const Line::line2d & l1, const Line::line2d& l2);
         double calculate_angle_lines_3d(const Line::line3d & l1, const Line::  line3d& l2);
         double calculate_angle_plane_and_line(const plane::Plane3D &p,const Line::line3d &l);

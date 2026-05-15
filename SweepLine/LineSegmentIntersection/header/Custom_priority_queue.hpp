@@ -4,15 +4,15 @@
 #include "line_segment.hpp"
 namespace GeometricVision::LineSegmentIntersection
 {
-    template<typename T>
+    template<typename dtype>
     class CustomPriorityQueue
     {
     private:
-        std::map<T,std::vector<std::weak_ptr<Segment2D>>,EventComparator<T>> base_map;
+        std::map<dtype,std::vector<std::weak_ptr<Segment2D>>,EventComparator<dtype>> base_map;
     public:
-        void push (T&val);
-        void push(T &val,std::weak_ptr<Segment2D>set);
-        T top_event();
+        void push (dtype&val);
+        void push(dtype &val,std::weak_ptr<Segment2D>set);
+        dtype top_event();
         std::vector<std::weak_ptr<Segment2D>> top_seglist();
         void pop();
         bool empty();

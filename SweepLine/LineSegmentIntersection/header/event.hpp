@@ -15,13 +15,13 @@ namespace GeometricVision::LineSegmentIntersection
         bool operator==(Event &other);
         std::weak_ptr<Point::point2d>get_point();
     };
-    template<typename T>
+    template<typename dtype>
 struct EventComparator
     {
-        bool operator ()(const T&e1,const T&e2)
+        bool operator ()(const dtype&e1,const dtype&e2)
         {
-            std::weak_ptr<Point::point2d>pt=((T&)e1).get_point();
-            std::weak_ptr<Point::point2d>other_pt=((T&)e2).get_point();
+            std::weak_ptr<Point::point2d>pt=((dtype&)e1).get_point();
+            std::weak_ptr<Point::point2d>other_pt=((dtype&)e2).get_point();
             if ((*pt.lock())[Y]>(*other_pt.lock())[Y])
             {
                 return true;

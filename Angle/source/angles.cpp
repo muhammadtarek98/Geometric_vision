@@ -1,10 +1,10 @@
 #include "angles.hpp"
 namespace GeometricVision::Angle
 {
-    template<class T,size_t dim>
-    static double get_angle(vector::Vector<T,dim>v1,vector::Vector<T,dim>v2)
+    template<class dtype,size_t dim>
+     double get_angle(vector::Vector<dtype,dim>v1,vector::Vector<dtype,dim>v2)
     {
-        auto dot=vector::Vector<T,dim>::dot_product(v1,v2);
+        auto dot=vector::Vector<dtype,dim>::dot_product(v1,v2);
         auto rad_angle{acos(dot)};
         return RadToDeg(rad_angle);
     }

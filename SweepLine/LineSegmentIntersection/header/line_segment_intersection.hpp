@@ -7,13 +7,13 @@
 namespace GeometricVision
 {
     namespace LineSegmentIntersection{
-        template<typename T>
+        template<typename dtype>
     static std::pair<std::vector<line_seg_weak_ptr>,std::vector<line_seg_weak_ptr>> get_lset_cset(
-        std::set<line_seg_weak_ptr,EventComparator<T>>&status,Point::point_2d_weak_ptr sweep_point);
+        std::set<line_seg_weak_ptr,EventComparator<dtype>>&status,Point::point_2d_weak_ptr sweep_point);
         void intersections(std::list<line_seg_weak_ptr> &segments_list,
             std::list<IntersectionPoint>);
         static bool is_left(line_seg_weak_ptr cur,line_seg_weak_ptr other,Point::point_2d_weak_ptr);
-        template<typename T>
-        using sweep_line_iter=std::set<line_seg_weak_ptr,EventComparator<T>>::iterator;
+        template<typename dtype>
+        using sweep_line_iter=std::set<line_seg_weak_ptr,EventComparator<dtype>>::iterator;
     }
 }

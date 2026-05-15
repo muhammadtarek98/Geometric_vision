@@ -2,6 +2,9 @@
 #include "point.hpp"
 #include "core.hpp"
 #include "line.hpp"
+#include "Face.hpp"
+typedef GeometricVision::vector::Vector<double,DIM2> point2d;
+typedef GeometricVision::vector::vect3D point3d;
 namespace GeometricVision
 {
     namespace GeometricUtils
@@ -20,8 +23,8 @@ namespace GeometricVision
         bool collinear(const vector::vect3D &v1,const vector::vect3D &v2);
         bool collinear(const Point::point3d &p1,const Point::point3d &p2,const Point::point3d &p3);
         bool coplanar(const Point::point3d &p1,const Point::point3d &p2,const Point::point3d &p3,const Point::point3d &p4);
-        bool coplanar(const vector::vect3D &v1,const vector::vect3D &v2,const vector::vect3D &v3);
-        typedef vector::Vector<double,DIM2> point2d;
-        typedef vector::vect3D point3d;
+        bool coplanar(const vector::vect3D& v1, const vector::vect3D& v2, const vector::vect3D& v3);
+        template<typename dtype,size_t dim>
+        float signed_visibility_tetrahedron(const DCEL::Face<dtype,dim> &face,const Point::point3d &p);
     }
 }

@@ -44,25 +44,14 @@ namespace GeometricVision::GeometricUtils
     int orientation3d(const point3d& p1, const point3d& p2, const point3d& p3)
     {
         auto area=area_triangle_3d(p1,p2,p3);
-        if (area>0&&area<TOL)
+        if ((area>0&&area<TOL)||(area<0&&area>TOL))
         {
-            area=0;
-        }
-        if (area<0&&area>TOL)
-        {
-            area=0;
+            area=0.0;
         }
         auto p1x=p1[X];
         auto p1y=p1[Y];
-        auto p1z=p1[Z];
-
         auto p2x=p2[X];
         auto p2y=p2[Y];
-        auto p2z=p2[Z];
-
-        auto p3x=p3[X];
-        auto p3y=p3[Y];
-        auto p3z=p3[Z];
         if (area>0.0)
         {
             return static_cast<int>(RELATIVE_POINT_POSITION::LEFT);
@@ -164,17 +153,21 @@ namespace GeometricVision::GeometricUtils
         return collinear(v1,v2);
     }
 
-    bool coplanar(vector::vect3D& v1, vector::vect3D& v2, vector::vect3D& v3)
+    bool coplanar(const vector::vect3D& v1,const vector::vect3D& v2,const vector::vect3D& v3)
     {
         auto triple_product=scalar_triple_dot_product(v1,v2,v3);
         return is_equal(triple_product,0.0);
     }
-
     bool coplanar(const Point::point3d& p1, const Point::point3d& p2, const Point::point3d& p3, const Point::point3d& p4)
     {
         auto l1=(p2-p1);
         auto l2=(p3-p1);
         auto l3=(p4-p1);
         return coplanar(l1,l2,l3);
+    }
+    template<typename dtype,size_t dim>
+    float signed_visibility_tetrahedron(const DCEL::Face<dtype,dim> &face,const Point::point3d &p)
+    {
+        Point::point3d p1,p2,p3;
     }
 }

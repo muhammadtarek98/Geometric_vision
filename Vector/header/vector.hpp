@@ -10,33 +10,33 @@
 namespace GeometricVision::vector
 {
 
-    template<class coordinate_type,size_t dims=DIM3>
+    template<typename dtype,size_t dims=DIM3>
     class Vector
     {
-        static_assert(std::is_arithmetic_v<coordinate_type>,"vector has to be integer or float");
+        static_assert(std::is_arithmetic_v<dtype>,"vector has to be integer or float");
         static_assert(dims>=DIM2,"vector has to be 2D or more");
     private:
-        std::array<coordinate_type,dims> coords;
+        std::array<dtype,dims> coords;
     public:
         Vector()=default;
-        Vector(std::array<coordinate_type,dims>_coords):coords(_coords){};
+        Vector(std::array<dtype,dims>_coords):coords(_coords){};
         template<size_t D = dims, typename = typename std::enable_if<D == 3>::type>
-        Vector(coordinate_type x,coordinate_type y,coordinate_type z):coords({x,y,z}){};
+        Vector(dtype x,dtype y,dtype z):coords({x,y,z}){};
         template<size_t D = dims, typename = typename std::enable_if<D == 2>::type>
-        Vector(coordinate_type x,coordinate_type y):coords({x,y}){};
+        Vector(dtype x,dtype y):coords({x,y}){};
         bool operator==(const Vector& vect)const;
         signed int num_dims();
-        auto dtype();
+        auto get_dtype();
         bool operator!=(const Vector&vect);
         bool operator<(const Vector& vect) const;
         bool operator>(const Vector&vect)const;
         Vector operator+(const Vector& vect)const;
         Vector operator-(const Vector& vect)const;
         Vector operator*(const Vector&vect);
-        Vector operator*(const coordinate_type scalar);
-        coordinate_type operator[](int idx)const;
+        Vector operator*(const dtype scalar);
+        dtype operator[](int idx)const;
         //assign dim value
-        void assign(int dim,coordinate_type val);
+        void assign(int dim,dtype val);
         //dot product operation
         static double dot_product(const Vector &vect1,const Vector &vect2);
         //magnitude
@@ -55,4 +55,13 @@ namespace GeometricVision::vector
     double scalar_triple_dot_product(const vect3D &v1,const vect3D &v2,const vect3D &v3);
     double areaTriangle2D(const vect2D &point1,const vect2D &point2,const vect2D &point3);
     int orientation2D(const vect2D& point1, const vect2D& point2, const vect2D& point3);
+    template<typename dtype,size_t dim>
+    using vector_weak_ptr=std::weak_ptr<Vector<dtype,dim>>;
+    template<typename dtype,size_t dim>
+    using vector_shared_ptr=std::shared_ptr<Vector<dtype,dim>>;
+    template<typename dtype,size_t dim>
+    using vector_unique_ptr=std::unique_ptr<Vector<dtype,dim>>;
+
+
+
 }

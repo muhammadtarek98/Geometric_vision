@@ -3,32 +3,32 @@
 namespace GeometricVision
 {
     namespace DCEL{
-        template<class type=float,size_t dim=DIM3>
+        template<class dtype,size_t dim>
         class Edge
         {
         private:
-            std::weak_ptr<Vertex<type,dim>>origin;
-            std::weak_ptr<Edge>twin;
-            std::weak_ptr<Edge>next;
-            std::weak_ptr<Edge>prev;
-            std::weak_ptr<Face<type,dim>>face;
+            vertex_weak_ptr<dtype,dim>origin;
+            edge_weak_ptr<dtype,dim> twin;
+            edge_weak_ptr<dtype,dim> next;
+            edge_weak_ptr<dtype,dim>prev;
+            face_weak_ptr <dtype,dim>face;
             int id;
         public:
             Edge();
-            Edge(std::weak_ptr<Vertex<type,dim>>origin,
-                 std::weak_ptr<Edge>twin, std::weak_ptr<Edge>next, std::weak_ptr<Edge>prev,
-                 std::weak_ptr<Face<type,dim>>face);
-            Edge(const std::weak_ptr<Vertex<type,dim>>&origin,
-                 const std::weak_ptr<Edge>&twin,
-                 const std::weak_ptr<Edge>&next,
-                 const std::weak_ptr<Edge>&prev,
-                 const std::weak_ptr<Face<type,dim>>&face);
-            Edge( std::weak_ptr<Vertex<type,dim>>origin);
-            Edge(const std::weak_ptr<Vertex<type,dim>>&origin);
-            std::weak_ptr<Vertex<type,dim>>get_destination();
-            std::weak_ptr<Vertex<type,dim>>get_next();
-            std::weak_ptr<Vertex<type,dim>>get_prev();
-            std::weak_ptr<Vertex<type,dim>>get_twin();
+            Edge(vertex_weak_ptr <dtype,dim>origin,
+                 edge_weak_ptr<dtype,dim>twin, edge_weak_ptr<dtype,dim>next, edge_weak_ptr<dtype,dim>prev,
+                 face_weak_ptr<dtype,dim>face);
+            Edge(const vertex_weak_ptr<dtype,dim>&origin,
+                 const edge_weak_ptr<dtype,dim>&twin,
+                 const edge_weak_ptr<dtype,dim>&next,
+                 const edge_weak_ptr<dtype,dim>&prev,
+                 const face_weak_ptr<dtype,dim>&face);
+            Edge( vertex_weak_ptr<dtype,dim>origin);
+            Edge(const vertex_weak_ptr<dtype,dim>&origin);
+            vertex_weak_ptr<dtype,dim> get_destination();
+            vertex_weak_ptr<dtype,dim> get_next();
+            vertex_weak_ptr<dtype,dim> get_prev();
+            vertex_weak_ptr<dtype,dim> get_twin();
             virtual  ~Edge()=default;
         };
     }

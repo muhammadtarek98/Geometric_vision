@@ -6,10 +6,10 @@ namespace GeometricVision::LineSegmentIntersection{
         auto ref_pt=ref.lock();
         return cur.lock()->get_x((*ref_pt)[Y])<other.lock()->get_x((*ref_pt)[Y]);
     }
-    template<typename T>
+    template<typename dtype>
 
     static std::pair<std::vector<line_seg_weak_ptr>,std::vector<line_seg_weak_ptr>> get_lset_cset(
-    std::set<line_seg_weak_ptr,EventComparator<T>>&status,
+    std::set<line_seg_weak_ptr,EventComparator<dtype>>&status,
     Point::point_2d_weak_ptr sweep_point)
     {
         std::vector<line_seg_weak_ptr>l_set,c_set;
@@ -28,14 +28,14 @@ namespace GeometricVision::LineSegmentIntersection{
         return std::make_pair(l_set,c_set);
 
     }
-    template<typename T>
+    template<typename dtype>
     void intersections(std::list<line_seg_weak_ptr> &segments_list,
         std::list<IntersectionPoint> intersection_points){
         CustomPriorityQueue<Event> queue;
         Point::point2d sweep_pt(0.0,0.0);
         Point::point2d prev_pt(0.0,0.0);
-        EventComparator<T> comp(&sweep_pt);
-        std::set<line_seg_weak_ptr,EventComparator<T>> status_struct(comp);
+        EventComparator<dtype> comp(&sweep_pt);
+        std::set<line_seg_weak_ptr,EventComparator<dtype>> status_struct(comp);
         for (auto seg:segments_list)
         {
             Event top(seg.lock()->get_p1_weak_ptr());
@@ -72,7 +72,7 @@ namespace GeometricVision::LineSegmentIntersection{
             }
             sweep_pt.assign(Y,prev_pt[Y]);
             sweep_pt.assign(X,prev_pt[X]);
-            std::list<std::pair<sweep_line_iter<T>,sweep_line_iter<T>>> l_pairs;
+            std::list<std::pair<sweep_line_iter<dtype>,sweep_line_iter<dtype>>> l_pairs;
             
         }
 

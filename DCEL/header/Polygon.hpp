@@ -3,28 +3,28 @@
 namespace GeometricVision
 {
     namespace DCEL{
-        template<class type,size_t dim>
+        template<class dtype,size_t dim>
         class Polygon
         {
         private:
-            std::vector<std::weak_ptr<Vertex<type,dim>>>vertex_list;
+            std::vector<vertex_weak_ptr<dtype,dim>>vertex_list;
             //the edge list has all edges related to the polygon include half-edges and their twin edges
-            std::vector<std::weak_ptr<Edge<type,dim>>>edge_list;
-            std::vector<std::weak_ptr<Face<type,dim>>>face_list;
-            std::weak_ptr<Edge<type,dim>>empty_edge;
+            std::vector<edge_weak_ptr<dtype,dim>>edge_list;
+            std::vector<face_weak_ptr<dtype,dim>>face_list;
+            edge_weak_ptr<dtype,dim>empty_edge;
         public:
             explicit Polygon();
-            explicit Polygon(std::vector<vector::Vector<type,dim>>&points);
-            bool split(std::weak_ptr<Vertex<type,dim>>v1,std::weak_ptr<Vertex<type,dim>>v2);
-            bool join(std::weak_ptr<Vertex<type,dim>>v1,std::weak_ptr<Vertex<type,dim>>v2);
-            std::vector<std::weak_ptr<Vertex<type,dim>>> get_vertex_list();
-            std::vector<std::weak_ptr<Face<type,dim>>> get_face_list();
-            std::vector<std::weak_ptr<Edge<type,dim>>> get_edge_list();
-            std::weak_ptr<Vertex<type,dim>>get_vertex(vector::Vector<type,dim>&point);
-            void GetEdgesWithTheSameFaceGivenOrigins(std::weak_ptr<Vertex<type,dim>> v1,
-                                                     std::weak_ptr<Vertex<type,dim>> v2,
-                                                     std::weak_ptr<Edge<type,dim>> e1,
-                                                     std::weak_ptr<Edge<type,dim>> e2);
+            explicit Polygon(std::vector<vector::Vector<dtype,dim>>&points);
+            bool split(vertex_weak_ptr<dtype,dim>v1,vertex_weak_ptr<dtype,dim>v2);
+            bool join(vertex_weak_ptr<dtype,dim>v1,vertex_weak_ptr<dtype,dim>v2);
+            std::vector<vertex_weak_ptr<dtype,dim>> get_vertex_list();
+            std::vector<face_weak_ptr<dtype,dim>> get_face_list();
+            std::vector<edge_weak_ptr<dtype,dim>> get_edge_list();
+            vertex_weak_ptr<dtype,dim>get_vertex(vector::Vector<dtype,dim>&point);
+            void GetEdgesWithTheSameFaceGivenOrigins(vertex_weak_ptr<dtype,dim>v1,
+                                                     vertex_weak_ptr<dtype,dim> v2,
+                                                     edge_weak_ptr<dtype,dim> e1,
+                                                     edge_weak_ptr<dtype,dim> e2);
             virtual ~Polygon()=default;
         };
     }
