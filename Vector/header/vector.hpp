@@ -47,7 +47,7 @@ namespace GeometricVision::vector
         virtual ~Vector()=default;
     };
     typedef Vector<double,DIM2> vect2D;
-    typedef Vector<double,DIM3> vect3D;
+    typedef Vector<double> vect3D;
     float cross_product_2D(vect2D v1, vect2D v2);
     vect3D cross_product_3D(vect3D v1, vect3D v2);
     double dot_product(const vect3D &vect1,const vect3D &vect2);
@@ -61,7 +61,5 @@ namespace GeometricVision::vector
     using vector_shared_ptr=std::shared_ptr<Vector<dtype,dim>>;
     template<typename dtype,size_t dim>
     using vector_unique_ptr=std::unique_ptr<Vector<dtype,dim>>;
-
-
 
 }

@@ -2,7 +2,7 @@
 namespace GeometricVision::vector
 {
     template <typename  dtype, size_t dim>
-    bool Vector<dtype, dim>::operator==(const Vector<dtype, dim>&other) const
+    bool Vector<dtype, dim>::operator==(const Vector&other) const
     {
         for (size_t i=0;i<dim;i++)
         {
@@ -15,13 +15,13 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    bool Vector<dtype, dim>::operator!=(const Vector<dtype, dim>& vect)
+    bool Vector<dtype, dim>::operator!=(const Vector& vect)
     {
         return !(*this==vect);
     }
 
     template <typename dtype, size_t dim>
-    Vector<dtype, dim> Vector<dtype, dim>::operator+(const Vector<dtype, dim>& vect) const
+    Vector<dtype, dim> Vector<dtype, dim>::operator+(const Vector& vect) const
     {
         std::array<dtype,dim> coords;
         for (size_t i=0;i<dim;i++)
@@ -31,7 +31,7 @@ namespace GeometricVision::vector
         return Vector<dtype,dim>(coords);
     }
     template <typename dtype, size_t dim>
-    Vector<dtype, dim> Vector<dtype, dim>::operator-(const Vector<dtype, dim>& other) const
+    Vector<dtype, dim> Vector<dtype, dim>::operator-(const Vector& other) const
     {
         std::array<dtype,dim> coords;
         for (size_t i=0;i<dim;i++)
@@ -53,7 +53,7 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    Vector<dtype, dim> Vector<dtype, dim>::operator*(const Vector<dtype, dim>& vect)
+    Vector<dtype, dim> Vector<dtype, dim>::operator*(const Vector & vect)
     {
         std::array<dtype,dim> coords;
         for (size_t i=0;i<dim;i++)
@@ -74,7 +74,7 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    bool Vector<dtype, dim>::operator>(const Vector<dtype, dim>& vect) const
+    bool Vector<dtype, dim>::operator>(const Vector& vect) const
     {
         for (auto i=0;i<dim;i++)
         {
@@ -92,7 +92,7 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    bool Vector<dtype, dim>::operator<(const Vector<dtype, dim>& vect) const
+    bool Vector<dtype, dim>::operator<(const Vector& vect) const
     {
         for (auto i=0;i<dim;i++)
         {
@@ -128,8 +128,8 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    double Vector<dtype, dim>::dot_product(const Vector<dtype, dim>& vect1,
-                                            const Vector<dtype, dim>& vect2)
+    double Vector<dtype, dim>::dot_product(const Vector& vect1,
+                                            const Vector& vect2)
     {
         if (vect1.coords.size()!=vect2.coords.size())
         {
@@ -196,11 +196,7 @@ namespace GeometricVision::vector
         auto point12=point2-point1;
         auto point23=point3-point1;
         auto area=areaTriangle2D(point1,point2,point3);
-        if (area>0&&area<TOL)
-        {
-            area=0;
-        }
-        if (area<0&&area>TOL)
+        if ((area>0&&area<TOL)||(area<0&&area>TOL))
         {
             area=0;
         }
