@@ -1,9 +1,10 @@
 #include "gift_warpping.hpp"
 namespace GeometricVision::ConvexHull::ConvexHull2D
 {
-    std::vector<Point::point2d> gift_wrapping2D(const std::vector<Point::point2d>& point_set)
+    template<typename dtype>
+    std::vector<Point::point2d<dtype>> gift_wrapping2D(const std::vector<Point::point2d<dtype>>& point_set)
     {
-        std::vector<Point::point2d> convex_hull;
+        std::vector<Point::point2d<dtype>> convex_hull;
         if (point_set.size()<=3)
         {
             return convex_hull;

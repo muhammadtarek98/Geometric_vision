@@ -1,7 +1,8 @@
 #include "grahams.hpp"
 namespace GeometricVision::ConvexHull::ConvexHull2D
 {
-    bool SortComparator::operator()(Point::point2d p1, Point::point2d p2)
+    template<typename dtype>
+    bool SortComparator::operator()(Point::point2d<dtype> p1, Point::point2d<dtype> p2)
     {
         if ((p1[X]<p2[X])||((p1[X]==p2[X]) &&(p1[Y]<p2[Y])))
         {
@@ -9,10 +10,10 @@ namespace GeometricVision::ConvexHull::ConvexHull2D
         }
         return false;
     }
-
-    std::vector<Point::point2d> upper_hull_constructions(std::vector<Point::point2d>& points)
+    template<typename dtype>
+    std::vector<Point::point2d<dtype>> upper_hull_constructions(std::vector<Point::point2d<dtype>>& points)
     {
-        std::vector<Point::point2d> upper_hull_pts;
+        std::vector<Point::point2d<dtype>> upper_hull_pts;
         if (points.size()<=3)
         {
             return upper_hull_pts;
@@ -36,10 +37,10 @@ namespace GeometricVision::ConvexHull::ConvexHull2D
         upper_hull_pts.pop_back();
         return upper_hull_pts;
     }
-
-    std::vector<Point::point2d> lower_hull_constructions(std::vector<Point::point2d>& points)
+    template<typename dtype>
+    std::vector<Point::point2d<dtype>> lower_hull_constructions(std::vector<Point::point2d<dtype>>& points)
     {
-            std::vector<Point::point2d> lower_hull_pts;
+            std::vector<Point::point2d<dtype>> lower_hull_pts;
             if (points.size()<=3)
             {
                 return lower_hull_pts;
@@ -64,10 +65,10 @@ namespace GeometricVision::ConvexHull::ConvexHull2D
         lower_hull_pts.pop_back();
         return lower_hull_pts;
     }
-
-    std::vector<Point::point2d> graham_convex_hull_construction(std::vector<Point::point2d>& points)
+    template<typename dtype>
+    std::vector<Point::point2d<dtype>> graham_convex_hull_construction(std::vector<Point::point2d<dtype>>& points)
     {
-        std::vector<Point::point2d> convex_hull;
+        std::vector<Point::point2d<dtype>> convex_hull;
         auto upper_hull=upper_hull_constructions(points);
         auto lower_hull=lower_hull_constructions(points);
         convex_hull.insert(convex_hull.end(),upper_hull.begin(),upper_hull.end());

@@ -8,12 +8,20 @@
 namespace GeometricVision
 {
     namespace Intersection{
-        bool intersection(const std::tuple<const Point::point2d,const Point::point2d> &l1,const std::tuple<const Point::point2d,const Point::point2d> &pl2);
-        bool intersection(const Point::point2d &p1,const Point::point2d &p2,const Point::point2d &p3,const Point::point2d &p4);
-        bool intersection(const Point::point2d &p1,const Point::point2d &p2,const Point::point2d &p3,const Point::point2d &p4,Point::point2d &intersection_point);
-        bool intersection(const Line::line2d &l1,const Line::line2d &l2, Point::point2d &intersection_point);
-        bool intersection(const Line::line3d &l1,const Line::line3d &l2, Point::point3d &intersection_point);
-        Point::point3d plane_line_intersection(const Line::line3d &l,const plane::Plane3D &p);
-        Line::line3d plane_plane_intersection(const plane::Plane3D &p1,const plane::Plane3D &p2);
+        template<typename dtype>
+        bool intersection(const std::tuple<const Point::point2d<dtype>,const Point::point2d<dtype>> &l1,
+        const std::tuple<const Point::point2d<dtype>,const Point::point2d<dtype>> &pl2);
+        template<typename dtype>
+        bool intersection(const Point::point2d<dtype> &p1,const Point::point2d<dtype> &p2,const Point::point2d<dtype> &p3,const Point::point2d<dtype>&p4);
+        template<typename dtype>
+        bool intersection(const Point::point2d<dtype> &p1,const Point::point2d<dtype> &p2,const Point::point2d<dtype> &p3,const Point::point2d<dtype>&p4,Point::point2d<dtype> &intersection_point);
+        template<typename dtype>
+        bool intersection(const Line::line2d<dtype> &l1,const Line::line2d<dtype> &l2, Point::point2d<dtype> &intersection_point);
+        template<typename dtype>
+        bool intersection(const Line::line3d<dtype> &l1,const Line::line3d<dtype> &l2, Point::point3d<dtype> &intersection_point);
+        template<typename dtype>
+        Point::point3d<dtype> plane_line_intersection(const Line::line3d<dtype> &l,const plane::Plane3D<dtype> &p);
+        template<typename dtype>
+        Line::line3d<dtype> plane_plane_intersection(const plane::Plane3D<dtype> &p1,const plane::Plane3D<dtype> &p2);
     }
 }

@@ -8,7 +8,8 @@ namespace GeometricVision
     {
         namespace ConvexHull2D
         {
-            std::vector<Point::point2d> gift_wrapping2D(const std::vector<Point::point2d>& point_set);
+            template<typename dtype>
+            std::vector<Point::point2d<dtype>> gift_wrapping2D(const std::vector<Point::point2d<dtype>>& point_set);
         }
     }
 }

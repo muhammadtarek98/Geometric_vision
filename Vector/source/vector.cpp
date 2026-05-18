@@ -2,7 +2,7 @@
 namespace GeometricVision::vector
 {
     template <typename  dtype, size_t dim>
-    bool Vector<dtype, dim>::operator==(const Vector&other) const
+     const bool Vector<dtype, dim>::operator==(const Vector&other)const
     {
         for (size_t i=0;i<dim;i++)
         {
@@ -15,7 +15,7 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    bool Vector<dtype, dim>::operator!=(const Vector& vect)
+     const bool Vector<dtype, dim>::operator!=(const Vector& vect)const
     {
         return !(*this==vect);
     }
@@ -41,19 +41,19 @@ namespace GeometricVision::vector
         return Vector(coords);
     }
     template<typename dtype,size_t dim>
-    signed int Vector<dtype, dim>::num_dims()
+    signed int Vector<dtype, dim>::num_dims()const
     {
         return this->coords.size();
     }
 
     template <typename dtype, size_t dim>
-    auto Vector<dtype, dim>::get_dtype()
+    dtype Vector<dtype, dim>::get_dtype()
     {
         return typeid(this->coords[0]).name();
     }
 
     template <typename dtype, size_t dim>
-    Vector<dtype, dim> Vector<dtype, dim>::operator*(const Vector & vect)
+    Vector<dtype, dim> Vector<dtype, dim>::operator*(const Vector & vect) const
     {
         std::array<dtype,dim> coords;
         for (size_t i=0;i<dim;i++)
@@ -63,7 +63,7 @@ namespace GeometricVision::vector
         return Vector(coords);
     }
     template <typename dtype, size_t dim>
-    Vector<dtype, dim> Vector<dtype, dim>::operator*(const dtype scalar)
+    Vector<dtype, dim> Vector<dtype, dim>::operator*(dtype scalar)const
     {
         std::array<dtype,dim> coords;
         for (size_t i=0;i<dim;i++)
@@ -74,7 +74,7 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    bool Vector<dtype, dim>::operator>(const Vector& vect) const
+     const bool Vector<dtype, dim>::operator>(const Vector& vect)const
     {
         for (auto i=0;i<dim;i++)
         {
@@ -92,7 +92,7 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    bool Vector<dtype, dim>::operator<(const Vector& vect) const
+     const bool Vector<dtype, dim>::operator<(const Vector& vect)const
     {
         for (auto i=0;i<dim;i++)
         {
@@ -109,7 +109,7 @@ namespace GeometricVision::vector
     }
 
     template<typename dtype,size_t dim>
-    dtype Vector<dtype,dim>::operator[](int idx) const
+    const dtype Vector<dtype,dim>::operator[](int idx)const
     {
         if (idx>this->coords.size())
         {
@@ -128,33 +128,34 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    double Vector<dtype, dim>::dot_product(const Vector& vect1,
-                                            const Vector& vect2)
+    dtype Vector<dtype, dim>::dot_product(const Vector<dtype, dim>& vect1,
+                                            const Vector<dtype, dim>& vect2)
     {
         if (vect1.coords.size()!=vect2.coords.size())
         {
             return FLT_MIN;
         }
-        float prod=0.0;
+        dtype prod=0.0;
         for (auto i=0;i<vect1.coords.size();i++)
         {
             prod=prod+vect1[i]*vect2[i];
         }
         return prod;
     }
-    double dot_product(const vect3D &vect1,const vect3D &vect2)
-    {
-        return Vector<double>::dot_product(vect1,vect2);
-    }
-    double  dot_product(const vect2D &vect1,const vect2D &vect2)
-    {
-        return Vector<double,DIM2>::dot_product(vect1,vect2);
+    template<typename dtype>
+dtype dot_product(const vect3D<dtype> &vect1, const vect3D<dtype> &vect2) {
+        return Vector<dtype, DIM3>::dot_product(vect1, vect2);
     }
 
-    template<class dtype,size_t dim>
-    float Vector<dtype,dim>::magnitude() const
+    template<typename dtype>
+    dtype dot_product(const vect2D<dtype> &vect1, const vect2D<dtype> &vect2) {
+        return Vector<dtype, DIM2>::dot_product(vect1, vect2);
+    }
+
+    template<typename dtype,size_t dim>
+    dtype Vector<dtype,dim>::magnitude() const
     {
-        float mag=0.0;
+        dtype mag=0.0;
         for (auto i =0;i<dim;i++)
         {
             mag+=pow(this->coords[i],2);
@@ -162,10 +163,10 @@ namespace GeometricVision::vector
         return sqrtf(mag);
     }
 
-    template <class dtype, size_t dim>
+    template <typename dtype, size_t dim>
     void Vector<dtype, dim>::normalization()
     {
-        const float mag=this->magnitude();
+        const dtype mag=this->magnitude();
 
         for (auto i=0;i<dim;i++)
         {
@@ -173,25 +174,30 @@ namespace GeometricVision::vector
         }
     }
 
-    float cross_product_2D(vect2D v1,vect2D v2)
+    template<typename dtype>
+    dtype cross_product_2D(vect2D<dtype> v1, vect2D<dtype> v2)
     {
         return v1[X]*v2[Y]-v1[Y]*v2[X];
     }
-    vect3D cross_product_3D(vect3D v1,vect3D v2)
+    template<typename dtype>
+vect3D<dtype> cross_product_3D(vect3D<dtype> v1, vect3D<dtype> v2)
     {
-        float x = v1[Y] * v2[Z] - v1[Z] * v2[Y];
-        float y = v1[Z] * v2[X] - v1[X] * v2[Z];
-        float z = v1[X] * v2[Y] - v1[Y] * v2[X];
-        return vect3D(x, y, z);
+        dtype x = v1[Y] * v2[Z] - v1[Z] * v2[Y];
+        dtype y = v1[Z] * v2[X] - v1[X] * v2[Z];
+        dtype z = v1[X] * v2[Y] - v1[Y] * v2[X];
+        return vect3D<dtype>(x, y, z);
     }
 
-    double areaTriangle2D(const vect2D& point1, const vect2D& point2, const vect2D& point3)
+    template<typename dtype>
+double areaTriangle2D(const vect2D<dtype> &point1,const vect2D<dtype> &point2,const vect2D<dtype> &point3)
     {
         auto point12=point2-point1;
         auto point13=point3-point1;
         return  cross_product_2D(point12,point13)/2;
     }
-    int orientation2D(const vect2D& point1, const vect2D& point2, const vect2D& point3)
+
+    template<typename dtype>
+    int orientation2D(const vect2D<dtype>& point1, const vect2D<dtype>& point2, const vect2D<dtype>& point3)
     {
         auto point12=point2-point1;
         auto point23=point3-point1;
@@ -228,16 +234,40 @@ namespace GeometricVision::vector
         return 0;
     }
 
-    double scalar_triple_dot_product(const vect3D& v1, const vect3D& v2, const vect3D& v3)
+    template<typename dtype>
+    double scalar_triple_dot_product(const vect3D<dtype> &v1,const vect3D<dtype> &v2,const vect3D<dtype> &v3)
     {
-        auto v2_v3_cross_product=cross_product_3D(v2,v3);
-        return vect3D::dot_product(v1,v2_v3_cross_product);
+        auto v2_v3_cross_product=cross_product_3D<dtype>(v2,v3);
+        return vect3D<dtype>::dot_product(v1,v2_v3_cross_product);
     }
 
+    // ========== Explicit instantiations for free functions ==========
+    template float cross_product_2D<float>(vect2D<float>, vect2D<float>);
+    template double cross_product_2D<double>(vect2D<double>, vect2D<double>);
+    template int cross_product_2D<int>(vect2D<int>, vect2D<int>);
 
-    template class Vector<double, 3>;
-    template class Vector<double, 2>;
-    template class Vector<float, 3>;
-    template class Vector<float, 2>;
+    template vect3D<float> cross_product_3D<float>(vect3D<float>, vect3D<float>);
+    template vect3D<double> cross_product_3D<double>(vect3D<double>, vect3D<double>);
+    template vect3D<int> cross_product_3D<int>(vect3D<int>, vect3D<int>);
+
+    template double scalar_triple_dot_product<float>(const vect3D<float>&, const vect3D<float>&, const vect3D<float>&);
+    template double scalar_triple_dot_product<double>(const vect3D<double>&, const vect3D<double>&, const vect3D<double>&);
+    template double scalar_triple_dot_product<int>(const vect3D<int>&, const vect3D<int>&, const vect3D<int>&);
+
+    template double areaTriangle2D<float>(const vect2D<float>&, const vect2D<float>&, const vect2D<float>&);
+    template double areaTriangle2D<double>(const vect2D<double>&, const vect2D<double>&, const vect2D<double>&);
+    template double areaTriangle2D<int>(const vect2D<int>&, const vect2D<int>&, const vect2D<int>&);
+
+    template int orientation2D<float>(const vect2D<float>&, const vect2D<float>&, const vect2D<float>&);
+    template int orientation2D<double>(const vect2D<double>&, const vect2D<double>&, const vect2D<double>&);
+    template int orientation2D<int>(const vect2D<int>&, const vect2D<int>&, const vect2D<int>&);
+
+    template float dot_product<float>(const vect3D<float>&, const vect3D<float>&);
+
+    template int dot_product<int>(const vect3D<int>&, const vect3D<int>&);
+
+    template float dot_product<float>(const vect2D<float>&, const vect2D<float>&);
+    template double dot_product<double>(const vect2D<double>&, const vect2D<double>&);
+    template int dot_product<int>(const vect2D<int>&, const vect2D<int>&);
 
 }

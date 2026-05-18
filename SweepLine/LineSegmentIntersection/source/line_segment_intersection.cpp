@@ -1,16 +1,17 @@
 #include "line_segment_intersection.hpp"
 
 namespace GeometricVision::LineSegmentIntersection{
-    static bool is_left(line_seg_weak_ptr cur,line_seg_weak_ptr other,Point::point_2d_weak_ptr ref)
+    template<typename dtype,size_t dim=DIM2>
+
+    static bool is_left(line_seg_weak_ptr cur,line_seg_weak_ptr other,Point::point_2d_weak_ptr<dtype,dim> ref)
     {
         auto ref_pt=ref.lock();
         return cur.lock()->get_x((*ref_pt)[Y])<other.lock()->get_x((*ref_pt)[Y]);
     }
-    template<typename dtype>
-
+    template<typename dtype,size_t dim =DIM2>
     static std::pair<std::vector<line_seg_weak_ptr>,std::vector<line_seg_weak_ptr>> get_lset_cset(
     std::set<line_seg_weak_ptr,EventComparator<dtype>>&status,
-    Point::point_2d_weak_ptr sweep_point)
+    Point::point_2d_weak_ptr<dtype,dim> sweep_point)
     {
         std::vector<line_seg_weak_ptr>l_set,c_set;
         for (auto seg:status)
@@ -30,8 +31,8 @@ namespace GeometricVision::LineSegmentIntersection{
     }
     template<typename dtype>
     void intersections(std::list<line_seg_weak_ptr> &segments_list,
-        std::list<IntersectionPoint> intersection_points){
-        CustomPriorityQueue<Event> queue;
+        std::list<IntersectionPoint<dtype>> intersection_points){
+        CustomPriorityQueue<Event<dtype>> queue;
         Point::point2d sweep_pt(0.0,0.0);
         Point::point2d prev_pt(0.0,0.0);
         EventComparator<dtype> comp(&sweep_pt);
@@ -43,7 +44,7 @@ namespace GeometricVision::LineSegmentIntersection{
             queue.push(top,seg);
             queue.push(bot);
         }
-        Event e;
+        Event<dtype> e;
         std::vector<line_seg_weak_ptr> uset;
         std::vector<line_seg_weak_ptr> lset;
         std::vector<line_seg_weak_ptr> cset;
@@ -66,7 +67,7 @@ namespace GeometricVision::LineSegmentIntersection{
             auto total_size=uset.size()+lset.size()+cset.size();
             if (total_size>1)
             {
-                IntersectionPoint intersection_pt;
+                IntersectionPoint<dtype> intersection_pt;
                 intersection_pt.set_point(sweep_pt);
                 //intersection_points.erase( )
             }

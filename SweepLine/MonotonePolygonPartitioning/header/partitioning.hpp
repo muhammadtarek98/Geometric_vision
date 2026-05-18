@@ -8,15 +8,15 @@ namespace GeometricVision
 {
     namespace PolygonPartition
     {
-        template<class type,size_t dim>
+        template<typename dtype,size_t dim>
         class SweepLine
         {
         private:
-            std::weak_ptr<Point::point2d>point;
+            Point::point_2d_weak_ptr<dtype> point;
         public:
-            SweepLine(std::shared_ptr<Point::point2d> pt);
-            bool operator()(std::unique_ptr<const EdgeWrapper<type,dim>> ref1,
-                            std::unique_ptr<const EdgeWrapper<type,dim>>ref2);
+            SweepLine(Point::point_2d_shared_ptr<dtype> pt);
+            bool operator()(std::unique_ptr<const EdgeWrapper<dtype,dim>> ref1,
+                            std::unique_ptr<const EdgeWrapper<dtype,dim>>ref2);
         };
         template<class type,size_t dim>
         void get_monotone_polygon(std::shared_ptr<DCEL::Polygon<type,dim>> poly,

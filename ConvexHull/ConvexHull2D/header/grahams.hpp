@@ -10,11 +10,15 @@ namespace GeometricVision
         {
             struct SortComparator
             {
-                bool operator()(Point::point2d p1,Point::point2d p2);
+                template<typename dtype>
+                bool operator()(Point::point2d<dtype> p1,Point::point2d<dtype> p2);
             };
-            std::vector<Point::point2d> upper_hull_constructions(std::vector<Point::point2d> &points);
-            std::vector<Point::point2d> lower_hull_constructions(std::vector<Point::point2d> &points);
-            std::vector<Point::point2d> graham_convex_hull_construction(std::vector<Point::point2d> &points);
+            template<typename dtype>
+            std::vector<Point::point2d<dtype>> upper_hull_constructions(std::vector<Point::point2d<dtype>> &points);
+            template<typename dtype>
+            std::vector<Point::point2d<dtype>> lower_hull_constructions(std::vector<Point::point2d<dtype>> &points);
+            template<typename dtype>
+            std::vector<Point::point2d<dtype>> graham_convex_hull_construction(std::vector<Point::point2d<dtype>> &points);
         }
     }
 }

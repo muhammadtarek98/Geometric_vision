@@ -1,8 +1,9 @@
 #include "intersection.hpp"
 namespace GeometricVision::Intersection
 {
-    bool intersection(const std::tuple<Point::point2d,Point::point2d>& l1,
-                      const std::tuple<Point::point2d,Point::point2d>& l2)
+    template<typename dtype>
+    bool intersection(const std::tuple<Point::point2d<dtype>,Point::point2d<dtype>>& l1,
+                      const std::tuple<Point::point2d<dtype>,Point::point2d<dtype>>& l2)
     {
         auto p11=std::get<0>(l1), p12=std::get<1>(l1);
         auto p21=std::get<0>(l2),p22=std::get<1>(l2);
@@ -35,23 +36,26 @@ namespace GeometricVision::Intersection
         auto left_3_4_1=orient_3_4_1==static_cast<int>(RELATIVE_POINT_POSITION::LEFT);
         auto left_3_4_2=orient_3_4_2==static_cast<int>(RELATIVE_POINT_POSITION::LEFT);
         return _xor(left_1_2_3,left_1_2_4)&& _xor(left_3_4_1,left_3_4_2);}
-    bool intersection(const Point::point2d &p1,const Point::point2d &p2,const Point::point2d &p3,const Point::point2d &p4)
+    template<typename dtype>
+
+    bool intersection(const Point::point2d<dtype> &p1,const Point::point2d<dtype> &p2,const Point::point2d<dtype> &p3,const Point::point2d<dtype> &p4)
     {
-        std::tuple<Point::point2d,Point::point2d> l1{std::make_tuple(p1,p2)};
-        std::tuple<Point::point2d,Point::point2d> l2{std::make_tuple(p3,p4)};
+        std::tuple<Point::point2d<dtype>,Point::point2d<dtype>> l1{std::make_tuple(p1,p2)};
+        std::tuple<Point::point2d<dtype>,Point::point2d<dtype>> l2{std::make_tuple(p3,p4)};
         return intersection(l1,l2);
     }
-
-    bool intersection(const Point::point2d &p1,const Point:: point2d &p2, const Point::point2d& p3,const Point::point2d &p4,Point::point2d &intersection_point)
+    template<typename dtype>
+    bool intersection(const Point::point2d<dtype> &p1,const Point:: point2d<dtype> &p2, const Point::point2d<dtype>& p3,
+        const Point::point2d<dtype> &p4,Point::point2d<dtype> &intersection_point)
     {
-        vector::vect2D p12=p2-p1;
-        vector::vect2D p34=p4-p3;
-        vector::vect2D normal{p34[Y],-p34[X]};
-        auto dem=vector::vect2D::dot_product(normal,p12);
+        vector::vect2D<dtype> p12=p2-p1;
+        vector::vect2D<dtype> p34=p4-p3;
+        vector::vect2D<dtype> normal{p34[Y],-p34[X]};
+        auto dem=vector::vect2D<dtype>::dot_product(normal,p12);
         if (!is_equal(dem,0.0))
         {
             auto p13=p3-p1;
-            auto num= vector::vect2D::dot_product(normal,p13);
+            auto num= vector::vect2D<dtype>::dot_product(normal,p13);
             auto t=num/dem;
             auto x=p1[X]+t*p12[X];
             auto y=p1[Y]+t*p12[Y];
@@ -59,13 +63,11 @@ namespace GeometricVision::Intersection
             intersection_point.assign(Y,y);
             return true;
         }
-        else
-        {
-            return false;
-        }
+             return false;
     }
+    template<typename dtype>
 
-    bool intersection(const Line::line2d &l1,const Line::line2d &l2, Point::point2d & intersection_point)
+    bool intersection(const Line::line2d<dtype> &l1,const Line::line2d<dtype> &l2, Point::point2d <dtype>& intersection_point)
     {
         Point::point2d start_l1 = l1.Get_point();
         Point::point2d end_l1 = start_l1 + l1.Get_direction();
@@ -73,15 +75,16 @@ namespace GeometricVision::Intersection
         Point::point2d end_l2 = start_l2 + l2.Get_direction();
         return intersection(start_l1, end_l1, start_l2, end_l2, intersection_point);
     }
+    template<typename dtype>
 
-    bool intersection(const Line::line3d &l1,const Line::line3d &l2, Point::point3d &intersection_point)
+    bool intersection(const Line::line3d<dtype> &l1,const Line::line3d<dtype> &l2, Point::point3d <dtype>&intersection_point)
     {
         auto p1 = l1.Get_point();
         auto d1 = l1.Get_direction();
         auto p2 = l2.Get_point();
         auto d2 = l2.Get_direction();
 
-        auto d1xd2 = vector::cross_product_3D(d1, d2);
+        auto d1xd2 = vector::cross_product_3D<dtype>(d1, d2);
         auto mag2 = d1xd2.magnitude() * d1xd2.magnitude();
 
         if (is_equal(mag2, 0.0)) {
@@ -89,12 +92,12 @@ namespace GeometricVision::Intersection
         }
 
         auto p2p1 = p2 - p1;
-        auto num = vector::scalar_triple_dot_product(p2p1, d2, d1xd2);
+        auto num = vector::scalar_triple_dot_product<dtype>(p2p1, d2, d1xd2);
         auto t = num / mag2;
 
         auto p_on_l1 = p1 + d1 * t;
         auto p2p_on_l1 = p_on_l1 - p2;
-        auto dist = vector::cross_product_3D(p2p_on_l1, d2).magnitude();
+        auto dist = vector::cross_product_3D<dtype>(p2p_on_l1, d2).magnitude();
 
         if (is_equal(dist, 0.0)) {
             intersection_point = p_on_l1;
@@ -102,46 +105,77 @@ namespace GeometricVision::Intersection
         }
         return false;
     }
+    template<typename dtype>
 
-    Point::point3d plane_line_intersection(const Line::line3d &l, const plane::Plane3D &p)
+    Point::point3d<dtype> plane_line_intersection(const Line::line3d<dtype> &l, const plane::Plane3D<dtype> &p)
     {
         auto plane_normal=p.get_normal();
         auto line_origin=l.Get_point();
         auto line_dir=l.Get_direction();
         auto d=p.GetD();
-        if ( vector::vect3D::dot_product(plane_normal,line_dir)==0)
+        if ( vector::vect3D<dtype>::dot_product(plane_normal,line_dir)==0)
         {
-            return vector::vect3D(INFINITY,INFINITY,INFINITY);
+            return vector::vect3D<dtype>(INFINITY,INFINITY,INFINITY);
 
         }
-        auto t1=((-1*vector::vect3D::dot_product(plane_normal,
-                                                 line_origin)+d)/vector::vect3D::dot_product(plane_normal,line_dir));
+        auto t1=((-1*vector::vect3D<dtype>::dot_product(plane_normal,
+                                                 line_origin)+d)/vector::vect3D<dtype>::dot_product(plane_normal,line_dir));
         auto x=line_origin[X]+line_dir[X]*t1;
         auto y=line_origin[Y]+line_dir[Y]*t1;
         auto z=line_origin[Z]+line_dir[Z]*t1;
-        return Point::point3d(x,y,z);
+        return Point::point3d<dtype>(x,y,z);
     }
+    template<typename dtype>
 
-    Line::line3d plane_plane_intersection(const plane::Plane3D &p1, const plane::Plane3D &p2)
+    Line::line3d<dtype> plane_plane_intersection(const plane::Plane3D<dtype> &p1, const plane::Plane3D<dtype> &p2)
     {
         auto n1=p1.get_normal(),n2=p2.get_normal();
         auto d1=p1.GetD(),d2=p2.GetD();
-        auto line_dir=vector::cross_product_3D(n1,n2);
+        auto line_dir=vector::cross_product_3D<dtype>(n1,n2);
         if (is_equal(line_dir.magnitude(),0.0))
         {
-            Point::point3d inf_pt(INFINITY, INFINITY, INFINITY);
-            return Line::line3d(inf_pt, inf_pt);
+            Point::point3d<dtype> inf_pt(INFINITY, INFINITY, INFINITY);
+            return Line::line3d<dtype>(inf_pt, inf_pt);
         }
-        auto dot=vector::vect3D::dot_product(n1,n2);
+        auto dot=vector::vect3D<dtype>::dot_product(n1,n2);
         auto n1xn2=pow(dot,2);
         auto a=(d2*n1xn2-d1)/(dot-1);
         auto b=(d1*n1xn2-d1)/(n1xn2-1);
         auto point=n1*a+n2*b;
-        Line::line3d l;
+        Line::line3d<dtype> l;
         l.set_point(point);
         line_dir.normalization();
         l.set_direction(line_dir);
         return l;
     }
+// 4-point intersection
+template bool intersection<float>(const Point::point2d<float>&, const Point::point2d<float>&,
+                                  const Point::point2d<float>&, const Point::point2d<float>&,
+                                  Point::point2d<float>&);
+template bool intersection<double>(const Point::point2d<double>&, const Point::point2d<double>&,
+                                   const Point::point2d<double>&, const Point::point2d<double>&,
+                                   Point::point2d<double>&);
+template bool intersection<int>(const Point::point2d<int>&, const Point::point2d<int>&,
+                                const Point::point2d<int>&, const Point::point2d<int>&,
+                                Point::point2d<int>&);
 
+// line2d + line2d
+template bool intersection<float>(const Line::line2d<float>&, const Line::line2d<float>&, Point::point2d<float>&);
+template bool intersection<double>(const Line::line2d<double>&, const Line::line2d<double>&, Point::point2d<double>&);
+template bool intersection<int>(const Line::line2d<int>&, const Line::line2d<int>&, Point::point2d<int>&);
+
+// line3d + line3d
+template bool intersection<float>(const Line::line3d<float>&, const Line::line3d<float>&, Point::point3d<float>&);
+template bool intersection<double>(const Line::line3d<double>&, const Line::line3d<double>&, Point::point3d<double>&);
+template bool intersection<int>(const Line::line3d<int>&, const Line::line3d<int>&, Point::point3d<int>&);
+
+// plane + line
+template Point::point3d<float> plane_line_intersection<float>(const Line::line3d<float>&, const plane::Plane3D<float>&);
+template Point::point3d<double> plane_line_intersection<double>(const Line::line3d<double>&, const plane::Plane3D<double>&);
+template Point::point3d<int> plane_line_intersection<int>(const Line::line3d<int>&, const plane::Plane3D<int>&);
+
+// plane + plane
+template Line::line3d<float> plane_plane_intersection<float>(const plane::Plane3D<float>&, const plane::Plane3D<float>&);
+template Line::line3d<double> plane_plane_intersection<double>(const plane::Plane3D<double>&, const plane::Plane3D<double>&);
+template Line::line3d<int> plane_plane_intersection<int>(const plane::Plane3D<int>&, const plane::Plane3D<int>&);
 }

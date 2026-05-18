@@ -15,6 +15,7 @@ add_subdirectory(Distance)
 add_subdirectory(DCEL)
 add_subdirectory(SweepLine)
 add_subdirectory(ConvexHull)
+add_subdirectory(Polyhedron)
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME}
     Core
@@ -28,6 +29,7 @@ target_link_libraries(${PROJECT_NAME}
     Distance
     DCEL
     SweepLine
+    PolyHedron
     GTest::gtest_main)
 find_program(VALGRIND_PROGRAM valgrind)
 if(VALGRIND_PROGRAM)

@@ -6,8 +6,9 @@ namespace GeometricVision
 {
         namespace Distance
         {
-                float distance_line_and_point(const Line::line3d &l, const Point::point3d &p);
-                float distance_point_plane(const Point::point3d& point,const plane::Plane3D& p);
-
+                template<typename dtype>
+                float distance_line_and_point(const Line::line3d<dtype> &l, const Point::point3d<dtype> &p);
+                template<typename dtype>
+                float distance_point_plane(const Point::point3d<dtype>& point,const plane::Plane3D<dtype>& p);
         }
 }

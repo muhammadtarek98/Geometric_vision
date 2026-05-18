@@ -3,22 +3,22 @@
 #include "vector.hpp"
 namespace GeometricVision::plane
 {
-    template<class dtype>
+    template<typename dtype>
     class Plane
     {
     private:
-        vector::vect3D normal;
-        float d;
+        vector::vect3D<dtype> normal;
+        dtype d;
     public:
         Plane()=default;
-        Plane(const vector::vect3D &vect,float constant);
-        Plane(vector::vect3D &&vect,float constant);
-        Plane(const Point::point3d& p1,const Point::point3d &p2,const Point::point3d &p3);
-        Plane(Point::point3d &&p1,Point::point3d &&p2,Point::point3d &&p3);
-        vector::vect3D get_normal() const;
+        Plane(const vector::vect3D<dtype> &vect,float constant);
+        Plane(vector::vect3D<dtype>  &&vect,float constant);
+        Plane(const Point::point3d<dtype>& p1,const Point::point3d<dtype> &p2,const Point::point3d<dtype> &p3);
+        Plane(Point::point3d<dtype> &&p1,Point::point3d<dtype> &&p2,Point::point3d<dtype> &&p3);
+        vector::vect3D<dtype> get_normal() const;
         float GetD() const;
         virtual ~Plane()=default;
     };
-    typedef Plane<float> Plane3D;
-
+    template<typename dtype>
+    using Plane3D=Plane<dtype>;
 }

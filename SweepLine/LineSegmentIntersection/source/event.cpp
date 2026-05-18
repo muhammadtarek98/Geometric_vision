@@ -1,14 +1,19 @@
 #include "event.hpp"
 namespace GeometricVision::LineSegmentIntersection
 {
-    Event::Event():point(){}
-    Event::Event(const Event& e):point(e.point){}
-    Event::Event(const std::weak_ptr<Point::point2d>& p):point(p){}
-    bool Event::operator==(Event& other)
+    template<typename dtype>
+    Event<dtype>::Event():point(){}
+    template<typename dtype>
+    Event<dtype>::Event(const Event& e):point(e.point){}
+    template<typename dtype>
+    Event<dtype>::Event(const Point::point_2d_weak_ptr<dtype>& p):point(p){}
+    template<typename dtype>
+    bool Event<dtype>::operator==(Event& other)
     {
         return point.lock()==other.get_point().lock();
     }
-    std::weak_ptr<Point::point2d> Event::get_point()
+    template<typename dtype>
+    Point::point_2d_weak_ptr<dtype> Event<dtype>::get_point()
     {
         return point;
     }

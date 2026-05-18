@@ -35,4 +35,6 @@ namespace GeometricVision::DCEL
     template class Vertex<double, DIM2>;
     template class Vertex<float, DIM3>;
     template class Vertex<float, DIM2>;
+    template class Vertex<int, DIM3>;
+    template class Vertex<int, DIM2>;
 }

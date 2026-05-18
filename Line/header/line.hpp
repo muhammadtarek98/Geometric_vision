@@ -3,7 +3,7 @@
 #include "vector.hpp"
 namespace GeometricVision::Line
 {
-    template<class dtype,size_t dim=DIM3>
+    template<typename dtype,size_t dim>
     class Line
     {
     private:
@@ -14,13 +14,13 @@ namespace GeometricVision::Line
         Line(vector::Vector<dtype,dim>&p1,vector::Vector<dtype,dim>&p2);
         Line(vector::Vector<dtype,dim>&&p1,vector::Vector<dtype,dim>&&p2);
         void set_direction(vector::Vector<dtype,dim> &dir);
-        void set_point(Point::point3d &point);
+        void set_point(vector::Vector<dtype,dim> &point); // Changed from Point::point3d<dtype>
         vector::Vector<dtype,dim> Get_direction() const;
         vector::Vector<dtype,dim>Get_point() const;
         virtual ~Line()=default;
-
-
     };
-    typedef Line<double,DIM2> line2d;
-    typedef Line<double,DIM3> line3d;
+    template<typename dtype>
+    using line2d=Line<dtype,DIM2>;
+    template<typename dtype>
+    using  line3d=Line<dtype,DIM3>;
 }

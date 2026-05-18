@@ -1,9 +1,9 @@
 #include "EdgeWrapper.hpp"
 namespace GeometricVision::PolygonPartition
 {
-    template <class type, size_t dim>
-    EdgeWrapper<type, dim>::EdgeWrapper(std::shared_ptr<DCEL::Edge<type, dim>> edge_,
-        VertexWrapper<type, dim>& helper)
+    template <typename dtype, size_t dim>
+    EdgeWrapper<dtype, dim>::EdgeWrapper(std::shared_ptr<DCEL::Edge<dtype, dim>> edge_,
+        VertexWrapper<dtype, dim>& helper)
     {
         this->edge=edge_;
         this->helper_vert=helper;
@@ -11,8 +11,8 @@ namespace GeometricVision::PolygonPartition
         this->des=this->edge->twin->origin->point;
     }
 
-    template <class type, size_t dim>
-    const float EdgeWrapper<type, dim>::computeX(const Point::point2d& pt)
+    template <typename dtype, size_t dim>
+    const float EdgeWrapper<dtype, dim>::computeX(const Point::point2d<dtype>& pt)
     {
         auto deno=(des[Y]-origin[Y]);
         if (deno!=0)

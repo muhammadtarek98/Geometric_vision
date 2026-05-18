@@ -2,12 +2,12 @@
 namespace GeometricVision::PolygonPartition
 {
 
-    template <class type, size_t dim>
-    SweepLine<type, dim>::SweepLine(std::shared_ptr<Point::point2d> pt):point(pt)
+    template <typename dtype, size_t dim>
+    SweepLine<dtype, dim>::SweepLine(Point::point_2d_shared_ptr<dtype> pt):point(pt)
     {}
 
-    template <typename type, size_t dim>
-    bool SweepLine<type,dim>::operator()(std::unique_ptr<const EdgeWrapper<type, dim>> ref1, std::unique_ptr<const EdgeWrapper<type, dim>> ref2)
+    template <typename dtype, size_t dim>
+    bool SweepLine<dtype,dim>::operator()(std::unique_ptr<const EdgeWrapper<dtype, dim>> ref1, std::unique_ptr<const EdgeWrapper<dtype, dim>> ref2)
     {
         return ref1->computeX(point)<ref2->computeX(point);
     }
@@ -164,23 +164,23 @@ namespace GeometricVision::PolygonPartition
     }
 
 
-    template<class type,size_t dim>
-    void get_monotone_polygon(std::shared_ptr<DCEL::Polygon<type,dim>> poly,
-                              std::vector<std::shared_ptr<DCEL::Polygon<type,dim>>> mono_polys){
-        std::vector<VertexWrapper<type,dim>> verts;
+    template<typename  dtype,size_t dim>
+    void get_monotone_polygon(std::shared_ptr<DCEL::Polygon<dtype,dim>> poly,
+                              std::vector<std::shared_ptr<DCEL::Polygon<dtype,dim>>> mono_polys){
+        std::vector<VertexWrapper<dtype,dim>> verts;
         for (auto vert:poly->get_vertex_list())
         {
-            verts.push_back(VertexWrapper<type,dim>{vert,vertex_category(vert)});
+            verts.push_back(VertexWrapper<dtype,dim>{vert,vertex_category(vert)});
         }
-        std::sort(verts.begin(),verts.end(),VertexWrapper<type,dim>());
-        std::shared_ptr<Point::point2d> sweep_pt;
+        std::sort(verts.begin(),verts.end(),VertexWrapper<dtype,dim>());
+        std::shared_ptr<Point::point2d<dtype>> sweep_pt;
         sweep_pt->assign(X,verts[0].vert->point[X]);
         sweep_pt->assign(Y,verts[0].vert->point[Y]);
-        SweepLine<type,dim> comp(sweep_pt);
-        std::set<std::shared_ptr<EdgeWrapper<type,dim>>,
-                 SweepLine<type,dim>> sweep_line(comp);
-        std::map<std::weak_ptr<DCEL::Edge<type,dim>>,
-                 std::shared_ptr<EdgeWrapper<type,dim>>> edge_mapper;
+        SweepLine<dtype,dim> comp(sweep_pt);
+        std::set<std::shared_ptr<EdgeWrapper<dtype,dim>>,
+                 SweepLine<dtype,dim>> sweep_line(comp);
+        std::map<std::weak_ptr<DCEL::Edge<dtype,dim>>,
+                 std::shared_ptr<EdgeWrapper<dtype,dim>>> edge_mapper;
         for (auto vert:verts)
         {
             sweep_pt->assign(X,vert.vert->point[X]);
@@ -213,13 +213,13 @@ namespace GeometricVision::PolygonPartition
                 return;
             }
         }
-    std::vector<std::vector<Point::point2d>>poly_verts;
+    std::vector<std::vector<Point::point2d<dtype>>>poly_verts;
         for (auto face_ptr:poly->get_face_list())
         {
             auto first_edge=face_ptr->outer;
             if (first_edge)
             {
-                std::vector<Point::point2d>verts;
+                std::vector<Point::point2d<dtype>>verts;
                 verts.push_back(first_edge->origin->point);
                 auto next_edge=first_edge->next;
                 while (next_edge!=first_edge)
@@ -231,7 +231,7 @@ namespace GeometricVision::PolygonPartition
         }
         for (auto poly_vert:poly_verts)
         {
-            mono_polys.push_back(std::make_shared<DCEL::Polygon<type,dim>>(poly));
+            mono_polys.push_back(std::make_shared<DCEL::Polygon<dtype,dim>>(poly));
         }
     }
 }

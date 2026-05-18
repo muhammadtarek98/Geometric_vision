@@ -10,10 +10,10 @@ namespace GeometricVision
         private:
             DCEL::edge_weak_ptr<dtype,dim> edge;
             VertexWrapper<dtype,dim> helper_vert;
-            Point::point2d origin,des;
+            Point::point2d<dtype> origin,des;
         public:
             EdgeWrapper(DCEL::edge_shared_ptr<dtype,dim> edge_,VertexWrapper<dtype,dim>&helper);
-            const float computeX(const Point::point2d &pt);
+            const float computeX(const Point::point2d<dtype> &pt);
         };
     }
 }
