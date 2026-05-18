@@ -25,7 +25,7 @@ namespace GeometricVision::vector
         template<size_t D = dims, typename = typename std::enable_if<D == 2>::type>
         Vector(dtype x,dtype y):coords({x,y}){};
         signed int num_dims()const ;
-        dtype get_dtype() ;
+        const char* get_dtype() ;
         const bool operator==(const Vector& vect)const;
          const bool operator!=(const Vector&vect)const;
          const bool operator<(const Vector& vect)const;
@@ -60,7 +60,7 @@ namespace GeometricVision::vector
     template<typename dtype>
     vect3D<dtype> cross_product_3D(vect3D<dtype> v1, vect3D<dtype> v2);
     template<typename dtype>
-    double dot_product(const vect3D<dtype> &vect1,const vect3D<dtype> &vect2);
+    dtype dot_product(const vect3D<dtype> &vect1,const vect3D<dtype> &vect2);
     template<typename dtype>
     dtype dot_product(const vect2D<dtype> &vect1,const vect2D<dtype> &vect2);
     template<typename dtype>
