@@ -25,10 +25,12 @@ namespace GeometricVision
                  const face_weak_ptr<dtype,dim>&face);
             Edge( vertex_weak_ptr<dtype,dim>origin);
             Edge(const vertex_weak_ptr<dtype,dim>&origin);
-            vertex_weak_ptr<dtype,dim> get_destination();
-            vertex_weak_ptr<dtype,dim> get_next();
-            vertex_weak_ptr<dtype,dim> get_prev();
-            vertex_weak_ptr<dtype,dim> get_twin();
+            edge_weak_ptr<dtype,dim> get_destination();
+            edge_weak_ptr<dtype,dim> get_next();
+            edge_weak_ptr<dtype,dim> get_prev();
+            edge_weak_ptr<dtype,dim> get_twin();
+            vertex_weak_ptr<dtype,dim>get_point();
+
             virtual  ~Edge()=default;
         };
     }

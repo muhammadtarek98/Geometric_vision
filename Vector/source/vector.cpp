@@ -261,16 +261,13 @@ double areaTriangle2D(const vect2D<dtype> &point1,const vect2D<dtype> &point2,co
     template int orientation2D<float>(const vect2D<float>&, const vect2D<float>&, const vect2D<float>&);
     template int orientation2D<double>(const vect2D<double>&, const vect2D<double>&, const vect2D<double>&);
     template int orientation2D<int>(const vect2D<int>&, const vect2D<int>&, const vect2D<int>&);
-
 template float dot_product<float>(const vect3D<float>&, const vect3D<float>&);
 template double dot_product<double>(const vect3D<double>&, const vect3D<double>&);
 template int dot_product<int>(const vect3D<int>&, const vect3D<int>&);
-
     template float dot_product<float>(const vect2D<float>&, const vect2D<float>&);
     template double dot_product<double>(const vect2D<double>&, const vect2D<double>&);
     template int dot_product<int>(const vect2D<int>&, const vect2D<int>&);
 
-    // ========== Explicit instantiations for Vector class ==========
     template class Vector<float, 2>;
     template class Vector<float, 3>;
     template class Vector<double, 2>;

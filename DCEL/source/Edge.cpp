@@ -35,30 +35,35 @@ namespace GeometricVision::DCEL
     }
 
     template <class dtype, size_t dim>
-    vertex_weak_ptr<dtype,dim>Edge<dtype, dim>::get_destination()
+    edge_weak_ptr<dtype,dim>Edge<dtype, dim>::get_destination()
     {
         return this->get_twin();
     }
 
     template <class dtype, size_t dim>
-    vertex_weak_ptr<dtype,dim>Edge<dtype, dim>::get_prev()
+    edge_weak_ptr<dtype,dim>Edge<dtype, dim>::get_prev()
     {
-        if (auto p = this->prev.lock()) return p->origin;
-        return vertex_weak_ptr<dtype,dim>();
+        if (auto p = this->prev.lock()) return this->prev;
+        return edge_weak_ptr<dtype,dim>();
+    }
+    template <class dtype, size_t dim>
+    vertex_weak_ptr<dtype,dim>Edge<dtype,dim>::get_point()
+    {
+        this->origin;
     }
 
     template <class dtype, size_t dim>
-    vertex_weak_ptr<dtype,dim>Edge<dtype, dim>::get_twin()
+    edge_weak_ptr<dtype,dim>Edge<dtype, dim>::get_twin()
     {
-        if (auto t = this->twin.lock()) return t->origin;
-        return vertex_weak_ptr<dtype,dim>();
+        if (auto t = this->twin.lock()) return this->twin;
+        return edge_weak_ptr<dtype,dim>();
     }
 
     template <class dtype, size_t dim>
-    vertex_weak_ptr<dtype,dim>Edge<dtype, dim>::get_next()
+    edge_weak_ptr<dtype,dim>Edge<dtype, dim>::get_next()
     {
-        if (auto n = this->next.lock()) return n->origin;
-        return vertex_weak_ptr<dtype, dim>();
+        if (auto n = this->next.lock()) return this->next;
+        return edge_weak_ptr<dtype, dim>();
     }
 
     template class Edge<double, DIM3>;
