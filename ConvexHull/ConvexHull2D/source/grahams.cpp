@@ -66,13 +66,17 @@ namespace GeometricVision::ConvexHull::ConvexHull2D
         return lower_hull_pts;
     }
     template<typename dtype>
-    std::vector<Point::point2d<dtype>> graham_convex_hull_construction(std::vector<Point::point2d<dtype>>& points)
+    std::vector<Point::point2d<dtype>> graham_convex_hull_construction(std::vector<Point::point2d<dtype>>& points,bool counter_clockwise=false)
     {
         std::vector<Point::point2d<dtype>> convex_hull;
         auto upper_hull=upper_hull_constructions(points);
         auto lower_hull=lower_hull_constructions(points);
         convex_hull.insert(convex_hull.end(),upper_hull.begin(),upper_hull.end());
         convex_hull.insert(convex_hull.end(),lower_hull.begin(),lower_hull.end());
+        if (counter_clockwise)
+        {
+            std::reverse(convex_hull.begin(),convex_hull.end());
+        }
         return convex_hull;
     }
 }
