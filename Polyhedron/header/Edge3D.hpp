@@ -1,10 +1,8 @@
 #pragma once
 #include <bits/stdc++.h>
 #include "Polyhedron_fwd.hpp" // Changed from Polyhedron.hpp
-namespace GeometricVision
+namespace GeometricVision::PolyHedron
 {
-    namespace PolyHedron
-    {
         template<typename dtype>
         class Edge3D
         {
@@ -16,5 +14,4 @@ namespace GeometricVision
             bool operator ==(const Edge3D<dtype> &other);
 
         };
-    }
 }

@@ -42,9 +42,4 @@ namespace GeometricVision::DCEL
         }
         return points;
     }
-
-    template class Face<double, DIM3>;
-    template class Face<double, DIM2>;
-    template class Face<float, DIM3>;
-    template class Face<float, DIM2>;
 }

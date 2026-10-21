@@ -13,7 +13,7 @@ namespace GeometricVision::PolyHedron
     }
 
     template <typename dtype>
-    bool Face3D<dtype>::operator==(const Face3D& _other)
+    bool Face3D<dtype>:: operator==(const Face3D& _other)
     {
         if (vertices.size()!=_other.vertices.size())
         {
@@ -35,5 +35,22 @@ namespace GeometricVision::PolyHedron
     void Face3D<dtype>::add_edge(edge_3d_weak_ptr<dtype> edge)
     {
         edges.push_back(edge);
+    }
+    template<typename dtype>
+    bool Face3D<dtype>::get_normal_switch()
+    {
+        return this->normal_switch_needed;
+    }
+
+    template <typename dtype>
+    void Face3D<dtype>::set_face_visibility(bool vis)
+    {
+        this->visible=vis;
+    }
+
+    template <typename dtype>
+    bool Face3D<dtype>::get_face_visibility()
+    {
+        return this->visible;
     }
 }

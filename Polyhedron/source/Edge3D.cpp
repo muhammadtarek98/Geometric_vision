@@ -16,9 +16,9 @@ namespace GeometricVision::PolyHedron
         face={nullptr,nullptr};
     }
     template <typename dtype>
-    bool  Edge3D<dtype>::operator==(const Edge3D<dtype>& _other) {
-        if ((this->vertices[0]->point==_other.vertices[0]->point)&&
-            (this->vertices[1]->point==_other.vertices[1]->point))
+    bool  Edge3D<dtype>::operator==(const Edge3D<dtype>& other) {
+        if ((this->vertices[0]->point==other.vertices[0]->point)&&
+            (this->vertices[1]->point==other.vertices[1]->point))
         {
             return true;
         }

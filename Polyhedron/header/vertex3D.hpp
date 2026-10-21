@@ -13,6 +13,8 @@ namespace GeometricVision
         public:
             Vertex3D();
             Vertex3D(Point::point_3d_weak_ptr<dtype>point,bool processed=false);
+            void set_processed(bool f);
+            bool get_processed();
         };
     }
 }

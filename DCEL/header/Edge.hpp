@@ -23,7 +23,7 @@ namespace GeometricVision
                  const edge_weak_ptr<dtype,dim>&next,
                  const edge_weak_ptr<dtype,dim>&prev,
                  const face_weak_ptr<dtype,dim>&face);
-            Edge( vertex_weak_ptr<dtype,dim>origin);
+            Edge(vertex_weak_ptr<dtype,dim>origin);
             Edge(const vertex_weak_ptr<dtype,dim>&origin);
             edge_weak_ptr<dtype,dim> get_destination();
             edge_weak_ptr<dtype,dim> get_next();
