@@ -64,9 +64,11 @@ namespace GeometricVision::vector
     template<typename dtype>
     dtype dot_product(const vect2D<dtype> &vect1,const vect2D<dtype> &vect2);
     template<typename dtype>
-    double scalar_triple_dot_product(const vect3D<dtype> &v1,const vect3D<dtype> &v2,const vect3D<dtype> &v3);
+    dtype scalar_triple_dot_product(const vect3D<dtype> &v1,const vect3D<dtype> &v2,const vect3D<dtype> &v3);
     template<typename dtype>
     double areaTriangle2D(const vect2D<dtype> &point1,const vect2D<dtype> &point2,const vect2D<dtype> &point3);
     template<typename dtype>
     int orientation2D(const vect2D<dtype>& point1, const vect2D<dtype>& point2, const vect2D<dtype>& point3);
+    template<typename dtype,size_t dim>
+    dtype scalar_triple_dot_product(const Vector<dtype,dim> &v1,const Vector<dtype,dim> &v2,const Vector<dtype,dim>  &v3);
 }

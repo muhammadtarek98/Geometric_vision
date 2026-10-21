@@ -128,8 +128,7 @@ namespace GeometricVision::vector
     }
 
     template <typename dtype, size_t dim>
-    dtype Vector<dtype, dim>::dot_product(const Vector<dtype, dim>& vect1,
-                                            const Vector<dtype, dim>& vect2)
+    dtype Vector<dtype, dim>::dot_product(const Vector<dtype, dim>& vect1,const Vector<dtype, dim>& vect2)
     {
         if (vect1.coords.size()!=vect2.coords.size())
         {
@@ -151,6 +150,7 @@ dtype dot_product(const vect3D<dtype> &vect1, const vect3D<dtype> &vect2) {
     dtype dot_product(const vect2D<dtype> &vect1, const vect2D<dtype> &vect2) {
         return Vector<dtype, DIM2>::dot_product(vect1, vect2);
     }
+
 
     template<typename dtype,size_t dim>
     dtype Vector<dtype,dim>::magnitude() const
@@ -187,13 +187,12 @@ vect3D<dtype> cross_product_3D(vect3D<dtype> v1, vect3D<dtype> v2)
         dtype z = v1[X] * v2[Y] - v1[Y] * v2[X];
         return vect3D<dtype>(x, y, z);
     }
-
     template<typename dtype>
 double areaTriangle2D(const vect2D<dtype> &point1,const vect2D<dtype> &point2,const vect2D<dtype> &point3)
     {
         auto point12=point2-point1;
         auto point13=point3-point1;
-        return  cross_product_2D(point12,point13)/2;
+        return  cross_product_2D<dtype>(point12,point13)/2;
     }
 
     template<typename dtype>
@@ -235,24 +234,22 @@ double areaTriangle2D(const vect2D<dtype> &point1,const vect2D<dtype> &point2,co
     }
 
     template<typename dtype>
-    double scalar_triple_dot_product(const vect3D<dtype> &v1,const vect3D<dtype> &v2,const vect3D<dtype> &v3)
+    dtype scalar_triple_dot_product(const vect3D<dtype> &v1,const vect3D<dtype> &v2,const vect3D<dtype> &v3)
     {
         auto v2_v3_cross_product=cross_product_3D<dtype>(v2,v3);
         return vect3D<dtype>::dot_product(v1,v2_v3_cross_product);
     }
-
     // ========== Explicit instantiations for free functions ==========
     template float cross_product_2D<float>(vect2D<float>, vect2D<float>);
     template double cross_product_2D<double>(vect2D<double>, vect2D<double>);
     template int cross_product_2D<int>(vect2D<int>, vect2D<int>);
-
     template vect3D<float> cross_product_3D<float>(vect3D<float>, vect3D<float>);
     template vect3D<double> cross_product_3D<double>(vect3D<double>, vect3D<double>);
     template vect3D<int> cross_product_3D<int>(vect3D<int>, vect3D<int>);
 
-    template double scalar_triple_dot_product<float>(const vect3D<float>&, const vect3D<float>&, const vect3D<float>&);
+    template float scalar_triple_dot_product<float>(const vect3D<float>&, const vect3D<float>&, const vect3D<float>&);
     template double scalar_triple_dot_product<double>(const vect3D<double>&, const vect3D<double>&, const vect3D<double>&);
-    template double scalar_triple_dot_product<int>(const vect3D<int>&, const vect3D<int>&, const vect3D<int>&);
+    template int scalar_triple_dot_product<int>(const vect3D<int>&, const vect3D<int>&, const vect3D<int>&);
 
     template double areaTriangle2D<float>(const vect2D<float>&, const vect2D<float>&, const vect2D<float>&);
     template double areaTriangle2D<double>(const vect2D<double>&, const vect2D<double>&, const vect2D<double>&);
