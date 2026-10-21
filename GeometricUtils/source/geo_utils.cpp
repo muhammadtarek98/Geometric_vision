@@ -189,6 +189,20 @@ namespace GeometricVision::GeometricUtils
     {
         Point::point3d p1,p2,p3;
     }
+    template<typename dtype,size_t dim>
+    dtype check_face_visibility(const DCEL::Face<dtype,dim> &f,const vector::Vector<dtype,dim> &p)
+    {
+        vector::Vector<dtype,dim> p1,p2,p3;
+        p1=f.get_points()[0];
+        p2=f.get_points()[1];
+        p3=f.get_points()[2];
+        auto a1=p2-p1;
+        auto b1=p3-p1;
+        auto c1=p3-p;
+        return vector::scalar_triple_dot_product(a1,b1,c1);
+
+    }
+
 // 2D
 template int orientation2d<float>(const Point::point2d<float>&, const Point::point2d<float>&, const Point::point2d<float>&);
 template int orientation2d<double>(const Point::point2d<double>&, const Point::point2d<double>&, const Point::point2d<double>&);

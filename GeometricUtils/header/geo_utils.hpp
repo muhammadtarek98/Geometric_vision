@@ -54,5 +54,8 @@ namespace GeometricVision
         bool coplanar(const vector::vect3D<dtype>& v1, const vector::vect3D<dtype>& v2, const vector::vect3D<dtype>& v3);
         template<typename dtype,size_t dim>
         float signed_visibility_tetrahedron(const DCEL::Face<dtype,dim> &face,const Point::point3d<dtype> &p);
+        //may be same as signed_visibility_tetrahedron function
+        template<typename dtype,size_t dim>
+        dtype check_face_visibility(const DCEL::Face<dtype,dim> &f,const vector::Vector<dtype,dim> &p);
     }
 }
