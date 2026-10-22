@@ -1,0 +1,5 @@
+file(GLOB SRC "./source/*.cpp")
+file(GLOB INCLUDE "./header/*.hpp")
+add_library(KDTree STATIC ${SRC})
+target_include_directories(KDTree PUBLIC ./header ${VECTOR_INCLUDE_DIR})
+target_link_libraries(KDTree PUBLIC Vector)

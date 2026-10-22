@@ -1,0 +1,4 @@
+file(GLOB SRC "./source/*.cpp")
+file(GLOB INCLUDE "./header/*.hpp")
+add_library(OneDimRangeQuery STATIC ${SRC})
+target_include_directories(OneDimRangeQuery PUBLIC ./header)
