@@ -16,6 +16,7 @@ add_subdirectory(DCEL)
 add_subdirectory(SweepLine)
 add_subdirectory(ConvexHull)
 add_subdirectory(Polyhedron)
+add_subdirectory(Tree)
 add_executable(${PROJECT_NAME} main.cpp)
 target_link_libraries(${PROJECT_NAME}
     Core
