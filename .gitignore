@@ -6,3 +6,6 @@ Testing/*
 /cmake-build-minsizerel/
 /cmake-build-release/
 /cmake-build-relwithdebinfo/
+/memory_issues.txt
+/incomplete rule_5.txt
+/build/
