@@ -486,9 +486,66 @@ TEST(DCELTest, VertexBasic) {
     EXPECT_EQ(v.get_edge().lock(), nullptr);
 }
 
+TEST(DCELTest, VertexWithPointAndEdge) {
+    vector::vect3D<double> pt(1.0, 2.0, 3.0);
+    auto e = std::make_shared<DCEL::Edge<double, DIM3>>();
+    DCEL::Vertex<double, DIM3> v(pt, e);
+
+    EXPECT_DOUBLE_EQ(v.get_point()[0], 1.0);
+    EXPECT_DOUBLE_EQ(v.get_point()[1], 2.0);
+    EXPECT_DOUBLE_EQ(v.get_point()[2], 3.0);
+    EXPECT_EQ(v.get_edge().lock(), e);
+
+    // Verify dangling pointer detection when owner is released
+    e.reset();
+    EXPECT_TRUE(v.get_edge().expired());
+    EXPECT_EQ(v.get_edge().lock(), nullptr);
+}
+
 TEST(DCELTest, EdgeBasic) {
     DCEL::Edge<double, DIM3> e;
     EXPECT_EQ(e.get_twin().lock(), nullptr);
+    EXPECT_EQ(e.get_next().lock(), nullptr);
+    EXPECT_EQ(e.get_prev().lock(), nullptr);
+}
+
+TEST(DCELTest, EdgeTopologyAndTwin) {
+    auto v1 = std::make_shared<DCEL::Vertex<double, DIM2>>(vector::Vector<double, DIM2>(0.0, 0.0), DCEL::edge_weak_ptr<double, DIM2>());
+    auto v2 = std::make_shared<DCEL::Vertex<double, DIM2>>(vector::Vector<double, DIM2>(1.0, 1.0), DCEL::edge_weak_ptr<double, DIM2>());
+
+    auto e1 = std::make_shared<DCEL::Edge<double, DIM2>>(v1);
+    auto e2 = std::make_shared<DCEL::Edge<double, DIM2>>(v2, e1, DCEL::edge_weak_ptr<double, DIM2>(), DCEL::edge_weak_ptr<double, DIM2>(), DCEL::face_weak_ptr<double, DIM2>());
+
+    EXPECT_EQ(e2->get_twin().lock(), e1);
+    EXPECT_EQ(e2->get_destination().lock(), e1);
+}
+
+TEST(DCELTest, DanglingPointerLifecycle) {
+    DCEL::vertex_weak_ptr<double, DIM3> weak_vert;
+    DCEL::edge_weak_ptr<double, DIM3> weak_edge;
+    {
+        auto vert = std::make_shared<DCEL::Vertex<double, DIM3>>();
+        auto edge = std::make_shared<DCEL::Edge<double, DIM3>>(vert);
+        weak_vert = vert;
+        weak_edge = edge;
+
+        EXPECT_FALSE(weak_vert.expired());
+        EXPECT_FALSE(weak_edge.expired());
+        EXPECT_NE(weak_vert.lock(), nullptr);
+        EXPECT_NE(weak_edge.lock(), nullptr);
+    }
+    // Out of scope: resources properly cleaned up, weak_ptrs safely report expiration
+    EXPECT_TRUE(weak_vert.expired());
+    EXPECT_TRUE(weak_edge.expired());
+    EXPECT_EQ(weak_vert.lock(), nullptr);
+    EXPECT_EQ(weak_edge.lock(), nullptr);
+}
+
+TEST(DCELTest, PolygonBasic) {
+    DCEL::Polygon<double, DIM2> poly;
+    EXPECT_TRUE(poly.get_vertex_list().empty());
+    EXPECT_TRUE(poly.get_edge_list().empty());
+    EXPECT_TRUE(poly.get_face_list().empty());
 }
 
 // ============================================================================

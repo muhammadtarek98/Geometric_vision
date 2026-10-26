@@ -27,7 +27,7 @@ namespace GeometricVision::DCEL
                              const edge_weak_ptr<dtype,dim>&edge):point(point),edge(edge){};
     template<class dtype,size_t dim>
     Vertex<dtype, dim>::Vertex(const vector::Vector<dtype, dim>&& point,
-                              const edge_weak_ptr<dtype,dim> &edge) : point(std::move(point)), edge(edge)
+                              const edge_weak_ptr<dtype,dim> &&edge) : point(std::move(point)), edge(edge)
     {
     };
 

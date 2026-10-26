@@ -15,8 +15,11 @@ namespace GeometricVision
             Vertex();
             Vertex(vector::Vector<dtype,dim>point,
                    const edge_weak_ptr<dtype,dim>&edge);
-            Vertex(const vector::Vector<dtype,dim>&point, const edge_weak_ptr<dtype,dim>&edge);
-            Vertex(const vector::Vector<dtype,dim>&&point, const edge_weak_ptr<dtype,dim>&edge);
+            Vertex(const vector::Vector<dtype,dim>&point,
+                const edge_weak_ptr<dtype,dim>&edge);
+            Vertex(const vector::Vector<dtype,dim>&&point,
+                const edge_weak_ptr<dtype,dim>&&edge);
+
             vector::Vector<dtype,dim>get_point();
             edge_weak_ptr<dtype,dim>get_edge();
             virtual ~Vertex()    = default;
