@@ -24,6 +24,10 @@ namespace GeometricVision::vector
         Vector(dtype x,dtype y,dtype z):coords({x,y,z}){};
         template<size_t D = dims, typename = typename std::enable_if<D == 2>::type>
         Vector(dtype x,dtype y):coords({x,y}){};
+        Vector(const Vector&vec):coords(vec.coords){};
+        Vector(const Vector &&vec)noexcept:coords(vec.coords){};
+        Vector&operator=(const Vector&vec);
+        Vector&operator=(Vector&&vec) noexcept ;
         signed int num_dims()const ;
         const char* get_dtype() ;
         const bool operator==(const Vector& vect)const;
@@ -44,6 +48,7 @@ namespace GeometricVision::vector
         //normalization
         void normalization();
         virtual ~Vector()=default;
+
     };
     template<typename dtype,size_t dim=DIM2>
     using vect2D=Vector<dtype,dim>;

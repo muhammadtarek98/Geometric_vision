@@ -69,10 +69,10 @@ namespace GeometricVision::Intersection
 
     bool intersection(const Line::line2d<dtype> &l1,const Line::line2d<dtype> &l2, Point::point2d <dtype>& intersection_point)
     {
-        Point::point2d start_l1 = l1.Get_point();
-        Point::point2d end_l1 = start_l1 + l1.Get_direction();
-        Point::point2d start_l2 = l2.Get_point();
-        Point::point2d end_l2 = start_l2 + l2.Get_direction();
+        Point::point2d<dtype> start_l1 = l1.Get_point();
+        Point::point2d<dtype> end_l1 = start_l1 + l1.Get_direction();
+        Point::point2d<dtype> start_l2 = l2.Get_point();
+        Point::point2d<dtype> end_l2 = start_l2 + l2.Get_direction();
         return intersection(start_l1, end_l1, start_l2, end_l2, intersection_point);
     }
     template<typename dtype>

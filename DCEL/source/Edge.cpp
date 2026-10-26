@@ -14,6 +14,24 @@ namespace GeometricVision::DCEL
     {
         ++(this->id);
     }
+    template<class dtype,size_t dim>
+    Edge<dtype,dim>::Edge(const vertex_shared_ptr<dtype,dim>&origin,
+     const edge_shared_ptr<dtype,dim>&twin,
+      edge_weak_ptr<dtype,dim>next,
+      edge_weak_ptr<dtype,dim>prev,
+      face_weak_ptr<dtype,dim>face):origin(origin),twin(twin),next(next),prev(prev),face(face)
+    {
+        ++(this->id);
+    }
+    template<class dtype,size_t dim>
+    Edge<dtype,dim>::Edge(const vertex_shared_ptr<dtype,dim>&origin,
+                 const edge_shared_ptr<dtype,dim>&twin,
+                 const edge_shared_ptr<dtype,dim>&next,
+                 const edge_shared_ptr<dtype,dim>&prev,
+                 const face_shared_ptr<dtype,dim>&face):origin(origin),twin(twin),next(next),prev(prev),face(face)
+    {
+        ++(this->id);
+    }
     template <class dtype, size_t dim>
     Edge<dtype, dim>::Edge(const vertex_weak_ptr<dtype,dim>&origin,
                           const edge_weak_ptr<dtype,dim>&twin, const edge_weak_ptr<dtype,dim>& next,
@@ -22,7 +40,20 @@ namespace GeometricVision::DCEL
     {
         ++(this->id);
     }
-
+    template<class dtype,size_t dim>
+    Edge<dtype,dim>::Edge(const vertex_weak_ptr<dtype,dim>&origin,
+                 const edge_weak_ptr<dtype,dim>&twin,
+                  edge_weak_ptr<dtype,dim>next,
+                  edge_weak_ptr<dtype,dim>prev,
+                  face_weak_ptr<dtype,dim>face):origin(origin),twin(twin),next(next),prev(prev),face(face)
+    {
+        ++(this->id);
+    }
+    template <class dtype, size_t dim>
+    Edge<dtype, dim>::Edge(vertex_shared_ptr<dtype,dim>origin):origin(origin)
+    {
+        ++(this->id);
+    }
     template <class dtype, size_t dim>
     Edge<dtype, dim>::Edge(vertex_weak_ptr<dtype,dim>origin):origin(origin)
     {

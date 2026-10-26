@@ -443,7 +443,7 @@ TEST(IntersectionTest, PlaneLine) {
     Line::line3d l(l1, l2);
     vector::vect3D<float> normal(1,0,0);
     plane::Plane3D<float> p(normal, 2.0f);
-    Point::point3d ip = Intersection::plane_line_intersection<float>(l, p);
+    Point::point3d<float> ip = Intersection::plane_line_intersection<float>(l, p);
     EXPECT_NEAR(ip[0], 2.0, 1e-6);
     EXPECT_NEAR(ip[1], 2.0, 1e-6);
     EXPECT_NEAR(ip[2], 2.0, 1e-6);
@@ -514,7 +514,10 @@ TEST(DCELTest, EdgeTopologyAndTwin) {
     auto v2 = std::make_shared<DCEL::Vertex<double, DIM2>>(vector::Vector<double, DIM2>(1.0, 1.0), DCEL::edge_weak_ptr<double, DIM2>());
 
     auto e1 = std::make_shared<DCEL::Edge<double, DIM2>>(v1);
-    auto e2 = std::make_shared<DCEL::Edge<double, DIM2>>(v2, e1, DCEL::edge_weak_ptr<double, DIM2>(), DCEL::edge_weak_ptr<double, DIM2>(), DCEL::face_weak_ptr<double, DIM2>());
+    auto e2 = std::make_shared<DCEL::Edge<double, DIM2>>(v2, e1,
+        DCEL::edge_weak_ptr<double, DIM2>(),
+        DCEL::edge_weak_ptr<double, DIM2>(),
+        DCEL::face_weak_ptr<double, DIM2>());
 
     EXPECT_EQ(e2->get_twin().lock(), e1);
     EXPECT_EQ(e2->get_destination().lock(), e1);

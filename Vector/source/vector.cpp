@@ -2,6 +2,30 @@
 namespace GeometricVision::vector
 {
     template <typename  dtype, size_t dim>
+    Vector<dtype, dim>& Vector<dtype, dim>::operator=(const Vector<dtype, dim>& vec)
+    {
+        if (&vec==this)
+        {
+            return *this;
+        }
+
+        this->coords=vec.coords;
+        return *this;
+
+    }
+
+    template <typename dtype, size_t dims>
+    Vector<dtype, dims>& Vector<dtype, dims>::operator=(Vector&& vec)noexcept
+    {
+        if (this==&vec)
+        {
+            return *this;
+        }
+        this->coords.swap(vec.coords);
+        return *this;
+    }
+
+    template <typename  dtype, size_t dim>
      const bool Vector<dtype, dim>::operator==(const Vector&other)const
     {
         for (size_t i=0;i<dim;i++)

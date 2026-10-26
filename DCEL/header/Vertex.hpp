@@ -13,12 +13,14 @@ namespace GeometricVision
             edge_weak_ptr<dtype,dim>edge;
         public:
             Vertex();
-            Vertex(vector::Vector<dtype,dim>point,
-                   const edge_weak_ptr<dtype,dim>&edge);
             Vertex(const vector::Vector<dtype,dim>&point,
                 const edge_weak_ptr<dtype,dim>&edge);
             Vertex(const vector::Vector<dtype,dim>&&point,
                 const edge_weak_ptr<dtype,dim>&&edge);
+            Vertex&operator=(const Vertex&vert);
+            Vertex&operator=(const Vertex&&vert);
+
+
 
             vector::Vector<dtype,dim>get_point();
             edge_weak_ptr<dtype,dim>get_edge();

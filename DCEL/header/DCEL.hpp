@@ -19,7 +19,7 @@ namespace GeometricVision
         template<typename dtype,size_t dim>
         using edge_shared_ptr = std::shared_ptr<Edge<dtype,dim>>;
         template<typename dtype,size_t dim>
-        using edge_unique_ptr = std::unique_ptr<Face<dtype,dim>>;
+        using edge_unique_ptr = std::unique_ptr<Edge<dtype,dim>>;
         template<typename dtype,size_t dim>
         using face_weak_ptr = std::weak_ptr<Face<dtype,dim>>;
         template<typename dtype,size_t dim>
