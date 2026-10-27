@@ -16,6 +16,6 @@ namespace GeometricVision::PolygonPartition{
             EdgeWrapper&operator=(const EdgeWrapper&e);
             EdgeWrapper&operator=(EdgeWrapper&&e)noexcept;
             EdgeWrapper(DCEL::edge_shared_ptr<dtype,dim> edge_,VertexWrapper<dtype,dim>&helper);
-            const float computeX(const Point::point2d<dtype> &pt);
+            const dtype computeX(const Point::point2d<dtype> &pt);
         };
     }

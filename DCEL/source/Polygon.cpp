@@ -95,6 +95,4 @@ Polygon<dtype,dim>::Polygon(Polygon&&p)noexcept
     template class Polygon<float, DIM3>;
     template class Polygon<double, DIM2>;
     template class Polygon<float, DIM2>;
-
-
 }

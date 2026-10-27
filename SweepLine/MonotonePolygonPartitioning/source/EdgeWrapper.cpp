@@ -62,7 +62,7 @@ namespace GeometricVision::PolygonPartition
     }
 
     template <typename dtype, size_t dim>
-    const float EdgeWrapper<dtype, dim>::computeX(const Point::point2d<dtype>& pt)
+    const dtype EdgeWrapper<dtype, dim>::computeX(const Point::point2d<dtype>& pt)
     {
         auto deno=(des[Y]-origin[Y]);
         if (deno!=0)

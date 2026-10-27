@@ -14,6 +14,18 @@
 #include "Face.hpp"
 #include "Polygon.hpp"
 #include "partitioning.hpp"
+#include "KDTree.hpp"
+#include "BST.hpp"
+#include "Polyhedron.hpp"
+#include "vertex3D.hpp"
+#include "Edge3D.hpp"
+#include "face.hpp"
+#include "event.hpp"
+#include "line_segment.hpp"
+#include "Custom_priority_queue.hpp"
+#include "SweepLine/LineSegmentIntersection/header/intersection.hpp"
+#include "VertexWrapper.hpp"
+#include "EdgeWrapper.hpp"
 
 using namespace GeometricVision;
 

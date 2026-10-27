@@ -30,7 +30,7 @@ namespace GeometricVision::LineSegmentIntersection
     template <typename dtype>
     IntersectionPoint<dtype>& IntersectionPoint<dtype>::operator=(IntersectionPoint&& p) noexcept
     {
-        if (this!=p)
+        if (this!=&p)
         {
             intersection_point=std::move(p.intersection_point);
         }
