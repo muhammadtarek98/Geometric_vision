@@ -1,10 +1,39 @@
 #include "partitioning.hpp"
 namespace GeometricVision::PolygonPartition
 {
+    template <typename dtype, size_t dim>
+    SweepLine<dtype, dim>::~SweepLine()
+    {
+
+    }
 
     template <typename dtype, size_t dim>
-    SweepLine<dtype, dim>::SweepLine(Point::point_2d_shared_ptr<dtype> pt):point(pt)
-    {}
+    SweepLine<dtype, dim>::SweepLine(SweepLine&& l) noexcept:point(std::move(l.point)){}
+    template <typename dtype, size_t dim>
+    SweepLine<dtype, dim>::SweepLine(const SweepLine& l):point(l.point){}
+    template <typename dtype, size_t dim>
+    SweepLine<dtype, dim>& SweepLine<dtype, dim>::operator=(SweepLine&& l) noexcept
+    {
+        if (this!=&l)
+        {
+            this->point=std::move(l.point);
+        }
+        return *this;
+    }
+
+    template <typename dtype, size_t dim>
+    SweepLine<dtype, dim>& SweepLine<dtype, dim>::operator=(const SweepLine& l)
+    {
+        if (this!=&l)
+        {
+            this->point=l.point;
+        }
+        return *this;
+
+    }
+
+    template <typename dtype, size_t dim>
+    SweepLine<dtype, dim>::SweepLine(Point::point_2d_shared_ptr<dtype> pt):point(pt){}
 
     template <typename dtype, size_t dim>
     bool SweepLine<dtype,dim>::operator()(std::unique_ptr<const EdgeWrapper<dtype, dim>> ref1, std::unique_ptr<const EdgeWrapper<dtype, dim>> ref2)

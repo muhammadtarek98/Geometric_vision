@@ -2,11 +2,16 @@
 namespace GeometricVision::Line
 {
     template<typename dtype,size_t dim>
-    Line<dtype,dim>::Line(vector::Vector<dtype,dim>&p1,vector::Vector<dtype,dim>&p2)
+    Line<dtype,dim>::Line()
+    {
+        direction=vector::Vector<dtype,dim>();
+        point=vector::Vector<dtype,dim>();
+    }
+    template<typename dtype,size_t dim>
+    Line<dtype,dim>::Line(const vector::Vector<dtype,dim>&p1,const vector::Vector<dtype,dim>&p2):point(p1)
     {
         direction=p2-p1;
         direction.normalization();
-        point=p1;
     }
     template <typename dtype, size_t dim>
     void Line<dtype, dim>::set_direction(vector::Vector<dtype, dim>& dir)
@@ -15,6 +20,44 @@ namespace GeometricVision::Line
         this->direction.assign(Y,dir[Y]);
         this->direction.assign(Z,dir[Z]);
     }
+
+    template <typename dtype, size_t dim>
+    Line<dtype, dim>& Line<dtype, dim>::operator=(Line&& l)noexcept
+    {
+        if (&l!=this)
+        {
+            this->direction=std::move(l.direction);
+            this->point=std::move(l.point);
+        }
+
+        return *this;
+    }
+    template <typename dtype, size_t dim>
+    Line<dtype, dim>& Line<dtype, dim>::operator=(const Line&l)
+    {
+        if (&l!=this)
+        {
+            this->direction=l.direction;
+            this->point=l.point;
+        }
+
+        return *this;
+    }
+    template<typename dtype,size_t dim>
+    Line<dtype,dim>::Line(const Line& other):point(other.point),direction(other.direction)
+    {
+    }
+    template<typename dtype,size_t dim>
+    Line<dtype,dim>::Line( Line&& other)noexcept:point(std::move(other.point)),
+    direction(std::move(other.direction)){}
+
+
+    template <typename dtype, size_t dim>
+    Line<dtype, dim>::~Line()
+    {
+
+    }
+
 
     template <typename dtype, size_t dim>
     void Line<dtype, dim>::set_point(vector::Vector<dtype,dim> &point)

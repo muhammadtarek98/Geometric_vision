@@ -4,9 +4,7 @@
 #include "intersection.hpp"
 #include "event.hpp"
 #include "Custom_priority_queue.hpp"
-namespace GeometricVision
-{
-    namespace LineSegmentIntersection{
+namespace GeometricVision::LineSegmentIntersection{
         template<typename dtype,size_t dim=DIM2>
     static std::pair<std::vector<line_seg_weak_ptr>,std::vector<line_seg_weak_ptr>> get_lset_cset(
         std::set<line_seg_weak_ptr,EventComparator<dtype>>&status,Point::point_2d_weak_ptr<dtype,dim> sweep_point);
@@ -18,4 +16,3 @@ namespace GeometricVision
         template<typename dtype>
         using sweep_line_iter=std::set<line_seg_weak_ptr,EventComparator<dtype>>::iterator;
     }
-}

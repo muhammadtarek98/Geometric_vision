@@ -25,6 +25,40 @@ namespace GeometricVision::DCEL
         return edges;
     }
 
+    template <typename dtype, size_t dim>
+    Face<dtype, dim>::Face(const Face& f)
+    {
+        this->outer_edge=f.outer_edge;
+        this->inner_edges=f.inner_edges;
+    }
+
+    template <typename dtype, size_t dim>
+    Face<dtype, dim>::Face(Face&& f)noexcept
+    {
+        this->outer_edge=std::move(f.outer_edge);
+        this->inner_edges=std::move(f.inner_edges);
+    }
+    template <typename dtype, size_t dim>
+    Face<dtype, dim>& Face<dtype,dim>::operator=(const Face& f)
+    {
+        if (this!=&f)
+        {
+            this->outer_edge=f.outer_edge;
+            this->inner_edges=f.inner_edges;
+        }
+        return *this;
+    }
+    template <typename dtype, size_t dim>
+    Face<dtype, dim>& Face<dtype,dim>::operator=(Face&& f)noexcept
+    {
+        if (this!=&f)
+        {
+            this->outer_edge=std::move(f.outer_edge);
+            this->inner_edges=std::move(f.inner_edges);
+        }
+        return *this;
+    }
+
     template <class dtype, size_t dim>
     std::vector<vector::Vector<dtype, dim>> Face<dtype, dim>::get_points()
     {

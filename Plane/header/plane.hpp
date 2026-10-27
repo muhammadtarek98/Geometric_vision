@@ -15,6 +15,10 @@ namespace GeometricVision::plane
         Plane(vector::vect3D<dtype>  &&vect,float constant);
         Plane(const Point::point3d<dtype>& p1,const Point::point3d<dtype> &p2,const Point::point3d<dtype> &p3);
         Plane(Point::point3d<dtype> &&p1,Point::point3d<dtype> &&p2,Point::point3d<dtype> &&p3);
+        Plane(const Plane &other);
+        Plane (Plane &&other)noexcept;
+        Plane& operator=(const Plane&other);
+        Plane& operator=(Plane&&other)noexcept;
         vector::vect3D<dtype> get_normal() const;
         float GetD() const;
         virtual ~Plane()=default;

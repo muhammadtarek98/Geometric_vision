@@ -6,10 +6,15 @@ namespace GeometricVision::PolygonPartition
     class VertexWrapper
     {
     private:
-        std::weak_ptr<DCEL::Vertex<type,dim>> vert;
+        DCEL::vertex_weak_ptr<type,dim> vert;
         VERTEX_CATEGORY category;
     public:
-        VertexWrapper(std::shared_ptr<DCEL::Vertex<type,dim>>vert,
+        ~VertexWrapper();
+        VertexWrapper(VertexWrapper&&v)noexcept;
+        VertexWrapper(const VertexWrapper&v);
+        VertexWrapper& operator=(const VertexWrapper&v);
+        VertexWrapper& operator=(VertexWrapper&&v)noexcept;
+        VertexWrapper(DCEL::vertex_shared_ptr<type,dim>vert,
                       VERTEX_CATEGORY category);
     };
     template<class type,size_t dim>

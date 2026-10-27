@@ -11,6 +11,11 @@ namespace GeometricVision::PolyHedron
         public:
             Edge3D(vertex_3d_weak_ptr<dtype>p1,vertex_3d_weak_ptr<dtype>p2);
             Edge3D();
+            Edge3D(const Edge3D &e);
+            Edge3D(Edge3D &&e)noexcept;
+            Edge3D&operator=(const Edge3D&e);
+            Edge3D&operator=(Edge3D&&e)noexcept;
+            ~Edge3D();
             bool operator ==(const Edge3D<dtype> &other);
 
         };

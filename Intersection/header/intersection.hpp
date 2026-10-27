@@ -5,9 +5,7 @@
 #include "point.hpp"
 #include "geo_utils.hpp"
 #include "plane.hpp"
-namespace GeometricVision
-{
-    namespace Intersection{
+namespace GeometricVision::Intersection{
         template<typename dtype>
         bool intersection(const std::tuple<const Point::point2d<dtype>,const Point::point2d<dtype>> &l1,
         const std::tuple<const Point::point2d<dtype>,const Point::point2d<dtype>> &pl2);
@@ -24,4 +22,3 @@ namespace GeometricVision
         template<typename dtype>
         Line::line3d<dtype> plane_plane_intersection(const plane::Plane3D<dtype> &p1,const plane::Plane3D<dtype> &p2);
     }
-}

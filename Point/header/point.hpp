@@ -1,8 +1,6 @@
 #pragma once
 #include "vector.hpp"
-namespace GeometricVision
-{
-    namespace Point{
+namespace GeometricVision::Point{
         template<typename dtype=double>
         using  point2d=vector::vect2D<dtype>;
         template<typename dtype=double>
@@ -31,6 +29,4 @@ namespace GeometricVision
         using point_3d_shared_ptr=std::shared_ptr<vector::Vector<dtype,dim>>;
         template<typename dtype,size_t dim=DIM3>
         using point_3d_unique_ptr=std::unique_ptr<vector::Vector<dtype,dim>>;
-
     }
-}

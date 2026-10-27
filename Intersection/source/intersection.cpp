@@ -129,6 +129,7 @@ namespace GeometricVision::Intersection
 
     Line::line3d<dtype> plane_plane_intersection(const plane::Plane3D<dtype> &p1, const plane::Plane3D<dtype> &p2)
     {
+        Line::line3d<dtype> l;
         auto n1=p1.get_normal(),n2=p2.get_normal();
         auto d1=p1.GetD(),d2=p2.GetD();
         auto line_dir=vector::cross_product_3D<dtype>(n1,n2);
@@ -142,7 +143,6 @@ namespace GeometricVision::Intersection
         auto a=(d2*n1xn2-d1)/(dot-1);
         auto b=(d1*n1xn2-d1)/(n1xn2-1);
         auto point=n1*a+n2*b;
-        Line::line3d<dtype> l;
         l.set_point(point);
         line_dir.normalization();
         l.set_direction(line_dir);

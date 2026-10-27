@@ -1,7 +1,38 @@
 #include "line_segment.hpp"
 namespace GeometricVision::LineSegmentIntersection
 {
+    template <typename dtype, size_t dim>
+    LineSegment<dtype, dim>::LineSegment(const LineSegment& l):p1(l.p1),p2(l.p2){}
+    template <typename dtype, size_t dim>
+    LineSegment<dtype, dim>::LineSegment(LineSegment&& l) noexcept:p1(std::move(l.p1)),
+    p2(std::move(l.p2)){}
+    template <typename dtype, size_t dim>
+    LineSegment<dtype, dim>& LineSegment<dtype, dim>::operator=(const LineSegment& l)
+    {
+        if (this!=&l)
+        {
+            p1=l.p1;
+            p2=l.p2;
+        }
+        return *this;
+    }
+
+    template <typename dtype, size_t dim>
+    LineSegment<dtype, dim>& LineSegment<dtype, dim>::operator=(LineSegment&& l)noexcept
+    {
+        if (this!=&l)
+        {
+            p1=std::move(l.p1);
+            p2=std::move(l.p2);
+        }
+        return *this;
+    }
+
     template<typename dtype,size_t dim  >
+    LineSegment<dtype, dim>::~LineSegment()
+    {
+    }
+    template<typename dtype,size_t dim>
     LineSegment<dtype,dim>::LineSegment()
     {
         if (dim==DIM3)

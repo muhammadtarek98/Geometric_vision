@@ -10,15 +10,6 @@ namespace GeometricVision::plane
         this->normal.normalization();
         this->d=vector::vect3D<dtype>::dot_product(this->normal,p1);
     }
-    /*template <typename dtype>
-        Plane<dtype>::Plane(Point::point3d p1,Point::point3d p2,Point::point3d p3)
-        {
-            auto p12=p2-p1;
-            auto p23=p3-p2;
-            this->normal=cross_product_3D(p12,p23);
-            this->normal.normalization();
-            this->d=vector::vect3D::dot_product(this->normal,p1);
-        }*/
     template <typename dtype>
     Plane<dtype>::Plane(Point::point3d<dtype> &&p1, Point::point3d<dtype> &&p2, Point::point3d<dtype> &&p3)
     {
@@ -28,6 +19,36 @@ namespace GeometricVision::plane
         this->normal.normalization();
         this->d=vector::dot_product(this->normal,p1);
     }
+
+    template <typename dtype>
+    Plane<dtype>& Plane<dtype>::operator=(const Plane& other)
+    {
+        if (this!=&other)
+        {
+            this->normal=other.normal;
+            this->d=other.d;
+        }
+        return *this;
+
+    }
+    template <typename dtype>
+    Plane<dtype>& Plane<dtype>::operator=(Plane&&other)noexcept
+    {
+        if (this!=&other)
+        {
+            this->normal=std::move(other.normal);
+            this->d=std::move(other.d);
+        }
+        return *this;
+
+    }
+    template <typename dtype>
+    Plane<dtype>::Plane(const Plane<dtype>&other):normal(other.normal),d(other.d)
+    {}
+    template<typename dtype>
+    Plane<dtype>::Plane(Plane&&other)noexcept:normal(std::move(other.normal)),d(std::move(other.d))
+    {}
+
     template <typename dtype>
     Plane<dtype>::Plane(const vector::vect3D<dtype> & vect, float constant):normal(vect),d(constant)
     {

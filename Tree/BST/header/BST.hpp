@@ -12,8 +12,13 @@ namespace GeometricVision::Tree
         std::shared_ptr<Node>right;
         std::shared_ptr<Node>parent;
     public:
+        Node(const Node &n);
+        Node(Node &&n)noexcept;
+        Node &operator=(const Node&n);
+        Node &operator=(Node&&n) noexcept ;
         Node(dtype val,std::shared_ptr<Node>l=nullptr,std::shared_ptr<Node>r=nullptr,std::shared_ptr<Node>p=nullptr);
         Node();
+        ~Node();
         std::weak_ptr<Node> get_left();
         std::weak_ptr<Node>get_right();
         dtype get_val();
@@ -28,7 +33,11 @@ namespace GeometricVision::Tree
         std::weak_ptr<Node<dtype>> predecessor(std::shared_ptr<Node<dtype>>node);
     public:
         BST();
-        ~BST();
+        BST(const BST&t);
+        BST(BST&&t)noexcept;
+        BST &operator=(const BST&t);
+        BST &operator=(BST&&t)noexcept;
+        ~BST()=default;
         BST(std::vector<dtype>&v,int index=0);
         bool isleaf(std::weak_ptr<Node<dtype>>node);
         std::weak_ptr<Node<dtype>>get_root();

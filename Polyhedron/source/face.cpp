@@ -13,6 +13,12 @@ namespace GeometricVision::PolyHedron
     }
 
     template <typename dtype>
+    Face3D<dtype>::~Face3D()
+    {
+
+    }
+
+    template <typename dtype>
     bool Face3D<dtype>:: operator==(const Face3D& _other)
     {
         if (vertices.size()!=_other.vertices.size())
@@ -52,5 +58,47 @@ namespace GeometricVision::PolyHedron
     bool Face3D<dtype>::get_face_visibility()
     {
         return this->visible;
+    }
+
+    template <typename dtype>
+    Face3D<dtype>::Face3D(Face3D&& f) noexcept
+    {
+        edges=std::move(f.edges);
+        vertices=std::move(f.vertices);
+        plane_=std::move(f.plane_);
+        normal_switch_needed=std::move(f.normal_switch_needed);
+        visible=std::move(f.visible);
+    }
+    template <typename dtype>
+        Face3D<dtype>::Face3D(const Face3D& f):edges(f.edges),vertices(f.vertices),plane_(f.plane_)
+    ,normal_switch_needed(f.normal_switch_needed),visible(f.vertices)
+    {}
+    template <typename dtype>
+    Face3D<dtype>& Face3D<dtype>::operator=(const Face3D& f)
+    {
+     if (this!=&f)
+     {
+      edges=f.edges;
+         vertices=f.vertices;
+         plane_=f.plane_;
+         visible=f.visible;
+         normal_switch_needed=f.normal_switch_needed;
+
+     }
+        return *this;
+    }
+    template <typename dtype>
+    Face3D<dtype>& Face3D<dtype>::operator=(Face3D&& f)noexcept
+    {
+        if (this!=&f)
+        {
+            edges=std::move(f.edges);
+            vertices=std::move(f.vertices);
+            plane_=std::move(f.plane_);
+            normal_switch_needed=std::move(f.normal_switch_needed);
+            visible=std::move(f.visible);
+        }
+        return *this;
+
     }
 }

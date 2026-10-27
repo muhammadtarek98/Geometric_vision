@@ -1,9 +1,7 @@
 #pragma once
 #include "vector.hpp"
 #include <bits/stdc++.h>
-namespace GeometricVision
-{
-    namespace DCEL{
+namespace GeometricVision::DCEL{
         template<typename  dtype, size_t dim> class Vertex;
         template<typename  dtype, size_t dim> class Edge;
         template<typename  dtype, size_t dim> class Face;
@@ -32,7 +30,4 @@ namespace GeometricVision
         using poly_shared_ptr = std::shared_ptr<Polygon<dtype,dim>>;
         template<typename dtype,size_t dim>
         using poly_unique_ptr = std::unique_ptr<Polygon<dtype,dim>>;
-
-
     }
-}

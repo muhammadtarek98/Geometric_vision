@@ -1,8 +1,39 @@
 #include "Polyhedron.hpp"
-namespace GeometricVision
+namespace GeometricVision::PolyHedron
 {
-    namespace PolyHedron
+    template<typename dtype>
+    Polyhedron<dtype>::~Polyhedron()
     {
+
+    }
+    template <typename dtype>
+    Polyhedron<dtype>::Polyhedron(const Polyhedron&p)
+    {
+        faces=p.faces;
+    }
+    template <typename dtype>
+    Polyhedron<dtype>::Polyhedron(Polyhedron&&p)noexcept
+    {
+        faces=std::move(p.faces);
+    }
+    template <typename dtype>
+    Polyhedron<dtype>& Polyhedron<dtype>::operator=(const Polyhedron&p)
+    {
+        if (this!=&p)
+        {
+            faces=p.faces;
+        }
+        return *this;
+    }
+    template <typename dtype>
+    Polyhedron<dtype>&Polyhedron<dtype>::operator=(Polyhedron&&p)noexcept
+    {
+        if (this!=&p)
+        {
+            faces=std::move(p.faces);
+        }
+        return *this;
+    }
         template <typename dtype>
         std::map<Face3D<dtype>,edge_3d_weak_ptr<dtype>> Polyhedron<dtype>::get_edges()
         {
@@ -138,5 +169,4 @@ namespace GeometricVision
         return std::make_tuple(faces,edges);
         }
 
-    }
 }

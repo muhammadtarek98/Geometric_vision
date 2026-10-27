@@ -12,9 +12,14 @@ namespace GeometricVision::LineSegmentIntersection
     public:
         Event();
         Event(const Event &e);
+        Event(Event &&e)noexcept;
+        Event&operator=(const Event&e);
+        Event&operator=(Event&&e)noexcept;
         Event(const Point::point_2d_weak_ptr<dtype>&p);
         bool operator==(Event &other);
         Point::point_2d_weak_ptr<dtype>get_point();
+        ~Event()=default;
+
     };
     template<typename dtype>
 struct EventComparator

@@ -4,9 +4,7 @@
 #include "point.hpp"
 #include "Edge.hpp"
 #include "EdgeWrapper.hpp"
-namespace GeometricVision
-{
-    namespace PolygonPartition
+namespace GeometricVision::PolygonPartition
     {
         template<typename dtype,size_t dim>
         class SweepLine
@@ -14,6 +12,12 @@ namespace GeometricVision
         private:
             Point::point_2d_weak_ptr<dtype> point;
         public:
+            ~SweepLine();
+            SweepLine(const SweepLine&l);
+            SweepLine(SweepLine&&l)noexcept;
+            SweepLine&operator=(const SweepLine&l);
+            SweepLine&operator=( SweepLine&&l)noexcept;
+
             SweepLine(Point::point_2d_shared_ptr<dtype> pt);
             bool operator()(std::unique_ptr<const EdgeWrapper<dtype,dim>> ref1,
                             std::unique_ptr<const EdgeWrapper<dtype,dim>>ref2);
@@ -56,4 +60,3 @@ namespace GeometricVision
                                           EdgeWrapper<type,dim>>&edge_mapper,std::shared_ptr<DCEL::Polygon<type,dim>>poly);
 
     }
-}

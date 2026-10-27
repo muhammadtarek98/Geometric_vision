@@ -454,7 +454,7 @@ TEST(IntersectionTest, PlanePlane) {
     vector::vect3D<float> n2(0,1,0);
     plane::Plane3D p1(n1, 0.0f);
     plane::Plane3D p2(n2, 0.0f);
-    Line::line3d l = Intersection::plane_plane_intersection(p1, p2);
+    Line::line3d<float> l = Intersection::plane_plane_intersection<float>(p1, p2);
     auto dir = l.Get_direction();
     EXPECT_NEAR(dir[0], 0.0, 1e-6);
     EXPECT_NEAR(dir[1], 0.0, 1e-6);

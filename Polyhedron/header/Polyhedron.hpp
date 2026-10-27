@@ -7,9 +7,7 @@
 #include "geo_utils.hpp"
 #include <vector> // Consider replacing with more specific includes if possible
 #include<map>
-namespace GeometricVision
-{
-    namespace PolyHedron
+namespace GeometricVision::PolyHedron
     {
         // The actual class definitions will be in their respective headers.
         // No need for forward declarations or using aliases here anymore as they are in Polyhedron_fwd.hpp
@@ -18,7 +16,13 @@ namespace GeometricVision
         {
             std::vector<Face3D<dtype>> faces;
         public:
-            void set_faces(std::vector<PolyHedron::face_weak_ptr<dtype>>&f);
+            Polyhedron()=default;
+            ~Polyhedron();
+            Polyhedron(const Polyhedron&p);
+            Polyhedron(Polyhedron&&p)noexcept;
+            Polyhedron&operator=(const Polyhedron&p);
+            Polyhedron&operator=(Polyhedron&&p)noexcept;
+            void set_faces(std::vector<face_weak_ptr<dtype>>&f);
             std::map<Face3D<dtype>,edge_3d_weak_ptr<dtype>>get_edges();
             std::vector<Face3D<dtype>>get_faces();
             std::map<Face3D<dtype>,Vertex3D<dtype>>get_vertices();
@@ -33,4 +37,3 @@ namespace GeometricVision
 
 
     }
-}

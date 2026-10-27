@@ -2,26 +2,25 @@
 namespace GeometricVision::vector
 {
     template <typename  dtype, size_t dim>
-    Vector<dtype, dim>& Vector<dtype, dim>::operator=(const Vector<dtype, dim>& vec)
+    Vector<dtype, dim>& Vector<dtype, dim>::operator=(const Vector& vec)
     {
-        if (&vec==this)
+        if (this!=&vec)
         {
-            return *this;
+            this->coords=vec.coords;
         }
-
-        this->coords=vec.coords;
         return *this;
-
     }
+    template<typename dtype,size_t dim>
+    Vector<dtype,dim>::Vector(Vector&&vec)noexcept:
+    coords(std::move(vec.coords)){}
 
     template <typename dtype, size_t dims>
     Vector<dtype, dims>& Vector<dtype, dims>::operator=(Vector&& vec)noexcept
     {
-        if (this==&vec)
+        if (this!=&vec)
         {
-            return *this;
+            this->coords=std::move(vec.coords);
         }
-        this->coords.swap(vec.coords);
         return *this;
     }
 

@@ -2,9 +2,7 @@
 #include "line.hpp"
 #include "point.hpp"
 #include"plane.hpp"
-namespace GeometricVision
-{
-        namespace Distance
+namespace GeometricVision::Distance
         {
                 template<typename dtype,size_t dim>
                 dtype squared_distance(vector::Vector<dtype,dim>&v1,vector::Vector<dtype,dim>&v2);
@@ -13,4 +11,3 @@ namespace GeometricVision
                 template<typename dtype>
                 float distance_point_plane(const Point::point3d<dtype>& point,const plane::Plane3D<dtype>& p);
         }
-}

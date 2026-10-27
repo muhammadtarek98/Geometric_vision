@@ -1,8 +1,6 @@
 #pragma once
 #include "DCEL.hpp"
-namespace GeometricVision
-{
-    namespace DCEL{
+namespace GeometricVision::DCEL{
         template<class dtype,size_t dim>
         class Polygon
         {
@@ -14,7 +12,12 @@ namespace GeometricVision
             edge_weak_ptr<dtype,dim>empty_edge;
         public:
             explicit Polygon();
-            explicit Polygon(std::vector<vector::Vector<dtype,dim>>&points);
+            explicit Polygon(const std::vector<vector::Vector<dtype,dim>>&points);
+            Polygon(const Polygon&p);
+            Polygon(Polygon&&p)noexcept;
+            Polygon&operator=(const Polygon&p);
+            Polygon&operator=(Polygon&&p)noexcept;
+
             bool split(vertex_weak_ptr<dtype,dim>v1,vertex_weak_ptr<dtype,dim>v2);
             bool join(vertex_weak_ptr<dtype,dim>v1,vertex_weak_ptr<dtype,dim>v2);
             std::vector<vertex_weak_ptr<dtype,dim>> get_vertex_list();
@@ -25,7 +28,6 @@ namespace GeometricVision
                                                      vertex_weak_ptr<dtype,dim> v2,
                                                      edge_weak_ptr<dtype,dim> e1,
                                                      edge_weak_ptr<dtype,dim> e2);
-            virtual ~Polygon()=default;
+            ~Polygon()=default;
         };
     }
-}

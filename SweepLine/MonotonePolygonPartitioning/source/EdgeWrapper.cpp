@@ -2,6 +2,56 @@
 namespace GeometricVision::PolygonPartition
 {
     template <typename dtype, size_t dim>
+    EdgeWrapper<dtype, dim>& EdgeWrapper<dtype, dim>::operator=(EdgeWrapper&& e) noexcept
+    {
+        if (this!=&e)
+        {
+            this->des=std::move(e.des);
+            this->edge=std::move(e.edge);
+            this->helper_vert=std::move(e.helper_vert);
+            this->origin=std::move(e.origin);
+        }
+        return *this;
+    }
+
+    template <typename dtype, size_t dim>
+    EdgeWrapper<dtype, dim>::EdgeWrapper(const EdgeWrapper& e)
+    {
+        this->des=e.des;
+        this->edge=e.edge;
+        this->helper_vert=e.helper_vert;
+        this->origin=e.origin;
+    }
+
+    template <typename dtype, size_t dim>
+    EdgeWrapper<dtype, dim>::EdgeWrapper(EdgeWrapper&& e) noexcept
+    {
+        this->des=std::move(e.des);
+        this->edge=std::move(e.edge);
+        this->helper_vert=std::move(e.helper_vert);
+        this->origin=std::move(e.origin);
+    }
+
+    template <typename dtype, size_t dim>
+    EdgeWrapper<dtype, dim>& EdgeWrapper<dtype, dim>::operator=(const EdgeWrapper& e)
+    {
+        if (this!=&e)
+        {
+            this->des=e.des;
+            this->edge=e.edge;
+            this->helper_vert=e.helper_vert;
+            this->origin=e.origin;
+        }
+        return *this;
+    }
+
+    template <typename dtype, size_t dim>
+    EdgeWrapper<dtype, dim>::~EdgeWrapper()
+    {
+
+    }
+
+    template <typename dtype, size_t dim>
     EdgeWrapper<dtype, dim>::EdgeWrapper(std::shared_ptr<DCEL::Edge<dtype, dim>> edge_,
         VertexWrapper<dtype, dim>& helper)
     {

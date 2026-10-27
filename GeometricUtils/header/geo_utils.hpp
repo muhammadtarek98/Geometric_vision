@@ -3,9 +3,7 @@
 #include "core.hpp"
 #include "line.hpp"
 #include "Face.hpp"
-namespace GeometricVision
-{
-    namespace GeometricUtils
+namespace GeometricVision::GeometricUtils
     {
         template<typename dtype>
         int orientation3d(const Point::point3d<dtype> &p1,const Point::point3d<dtype> &p2,const Point::point3d<dtype> &p3);
@@ -58,4 +56,3 @@ namespace GeometricVision
         template<typename dtype,size_t dim>
         dtype check_face_visibility(const DCEL::Face<dtype,dim> &f,const vector::Vector<dtype,dim> &p);
     }
-}

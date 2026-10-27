@@ -8,8 +8,13 @@ namespace GeometricVision::LineSegmentIntersection
         vector::Vector<dtype,dim> p1;
         vector::Vector<dtype,dim> p2;
     public:
+        LineSegment(LineSegment&&l)noexcept;
+        LineSegment(const LineSegment&l);
+        LineSegment& operator=(const LineSegment&l);
+        LineSegment& operator=(LineSegment&&l)noexcept;
         LineSegment(vector::Vector<dtype,dim> p1,vector::Vector<dtype,dim> p2);
         LineSegment();
+        ~LineSegment();
         double get_x(double y)const;
         vector::Vector<dtype,dim> get_p1();
         vector::Vector<dtype,dim> get_p2();

@@ -7,5 +7,7 @@ Testing/*
 /cmake-build-release/
 /cmake-build-relwithdebinfo/
 /memory_issues.txt
-/incomplete rule_5.txt
+/incomplete_rule_5.txt
 /build/
+/skills/
+/.claude/

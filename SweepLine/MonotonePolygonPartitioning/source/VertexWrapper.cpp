@@ -1,6 +1,41 @@
 #include "VertexWrapper.hpp"
 namespace GeometricVision::PolygonPartition
 {
+    template <class type, size_t dim>
+    VertexWrapper<type, dim>& VertexWrapper<type, dim>::operator=(const VertexWrapper& v)
+    {
+     if (this!=&v)
+     {
+         this->category=v.category;
+         this->vert=v.vert;
+     }
+        return *this;
+    }
+
+    template <class type, size_t dim>
+    VertexWrapper<type, dim>& VertexWrapper<type, dim>::operator=(VertexWrapper&& v) noexcept
+    {
+        if (this!=&v)
+        {
+            this->category=std::move(v.category);
+            this->vert=std::move(v.vert);
+        }
+        return *this;
+    }
+
+    template <class type, size_t dim>
+    VertexWrapper<type, dim>::VertexWrapper(const VertexWrapper& v):vert(v.vert),category(v.category){}
+
+    template <class type, size_t dim>
+    VertexWrapper<type, dim>::VertexWrapper(VertexWrapper&& v)noexcept:
+    vert(std::move(v.vert)),category(std::move(v.category)){}
+
+    template <class type, size_t dim>
+    VertexWrapper<type, dim>::~VertexWrapper()
+    {
+    }
+
+
     template<typename type,size_t dim>
     VertexWrapper<type,dim>::VertexWrapper(
         std::shared_ptr<DCEL::Vertex<type,dim>>vert_,

@@ -1,6 +1,52 @@
 #include "BST.hpp"
+#include "BST.hpp"
 namespace GeometricVision::Tree
 {
+    template <typename dtype>
+    Node<dtype>::Node(const Node& n):value(n.value),left(n.left),right(n.right),parent(n.parent)
+    {
+    }
+
+    template <typename dtype>
+    Node<dtype>::Node(Node&& n) noexcept
+    {
+        this->value=std::move(n.value);
+        this->left=std::move(n.left);
+        this->parent=std::move(n.parent);
+        this->right=std::move(n.right);
+    }
+
+    template <typename dtype>
+    Node<dtype>& Node<dtype>::operator=(const Node& n)
+    {
+        if (this!=&n)
+        {
+            this->value=n.value;
+            this->left=n.left;
+            this->parent=n.parent;
+            this->right=n.right;
+        }
+        return *this;
+    }
+    template <typename dtype>
+    Node<dtype>& Node<dtype>::operator=(Node&& n)noexcept
+    {
+        if (this!=&n)
+        {
+            this->value=std::move(n.value);
+            this->left=std::move(n.left);
+            this->parent=std::move(n.parent);
+            this->right=std::move(n.right);
+        }
+        return *this;
+    }
+
+    template <typename dtype>
+    Node<dtype>::~Node()
+    {
+
+    }
+
     template<typename dtype>
     Node<dtype>::Node()
     {
@@ -28,6 +74,35 @@ namespace GeometricVision::Tree
     BST<dtype>::BST()
     {
         this->root.get()=nullptr;
+    }
+    template <typename dtype>
+    BST<dtype>::BST(const BST&t)
+    {
+        this->root=t.root;
+    }
+    template <typename dtype>
+    BST<dtype>::BST(BST&&t)noexcept
+    {
+        this->root=std::move(t.root);
+    }
+
+    template <typename dtype>
+    BST<dtype>& BST<dtype>::operator=(const BST& t)
+    {
+        if (this!=&t)
+        {
+            this->root=t.root;
+        }
+        return *this;
+    }
+    template <typename dtype>
+    BST<dtype>& BST<dtype>::operator=(BST&& t)noexcept
+    {
+        if (this!=&t)
+        {
+            this->root=std::move(t.root);
+        }
+        return *this;
     }
 
     template <typename dtype>

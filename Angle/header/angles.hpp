@@ -2,9 +2,7 @@
 #include "line.hpp"
 #include "plane.hpp"
 #include "core.hpp"
-namespace GeometricVision
-{
-    namespace Angle{
+namespace GeometricVision::Angle{
         template<typename dtype,size_t dim>
         double get_angle(vector::Vector<dtype,dim>v1,vector::Vector<dtype,dim>v2);
         template<typename dtype>
@@ -18,4 +16,3 @@ namespace GeometricVision
         template<typename dtype>
         double polar_angle_2D(const Point::point2d<dtype> &src, const Point::point2d<dtype> &dst);
     }
-}

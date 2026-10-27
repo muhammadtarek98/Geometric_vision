@@ -1,14 +1,11 @@
 #pragma once
 #include <bits/stdc++.h>
-namespace GeometricVision
-{
-    namespace PolyHedron
+namespace GeometricVision::PolyHedron
     {
         // Forward declarations of classes
         template<typename dtype> class Vertex3D;
         template<typename dtype> class Edge3D;
         template<typename dtype> class Face3D;
-
         template<typename dtype>
         using vertex_3d_shared_ptr = std::shared_ptr<Vertex3D<dtype>>;
         template<typename dtype>
@@ -30,4 +27,3 @@ namespace GeometricVision
         template<typename dtype>
         using face_weak_ptr = std::weak_ptr<Face3D<dtype>>;
     }
-}

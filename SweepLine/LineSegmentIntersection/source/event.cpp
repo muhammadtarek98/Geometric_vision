@@ -1,6 +1,27 @@
 #include "event.hpp"
 namespace GeometricVision::LineSegmentIntersection
 {
+    template <typename dtype>
+    Event<dtype>::Event(Event&& e)noexcept:point(std::move(e.point)){}
+
+    template <typename dtype>
+    Event<dtype>& Event<dtype>::operator=(const Event& e)
+    {
+     if (this!=&e)
+     {
+         this->point=e.point;
+     }
+        return *this;
+    }
+    template <typename dtype>
+    Event<dtype>& Event<dtype>::operator=(Event&& e)noexcept
+    {
+        if (this!=&e)
+        {
+            this->point=std::move(e.point);
+        }
+        return *this;
+    }
     template<typename dtype>
     Event<dtype>::Event():point(){}
     template<typename dtype>
