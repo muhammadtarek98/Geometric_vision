@@ -31,6 +31,8 @@ target_link_libraries(${PROJECT_NAME}
     DCEL
     SweepLine
     PolyHedron
+    BST
+    KDTree
     GTest::gtest_main)
 find_program(VALGRIND_PROGRAM valgrind)
 if(VALGRIND_PROGRAM)

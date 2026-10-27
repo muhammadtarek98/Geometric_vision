@@ -16,7 +16,7 @@ namespace GeometricVision::LineSegmentIntersection{
         std::vector<line_seg_weak_ptr>l_set,c_set;
         for (auto seg:status)
         {
-            auto pos=GeometricVision::vector::orientation2D(seg.lock().get()->get_p1(),seg.lock().get()->get_p2(),sweep_point);
+            auto pos=vector::orientation2D(seg.lock().get()->get_p1(),seg.lock().get()->get_p2(),sweep_point);
             if (pos==RELATIVE_POINT_POSITION::DESTINATION)
             {
                 l_set.push_back(seg);
